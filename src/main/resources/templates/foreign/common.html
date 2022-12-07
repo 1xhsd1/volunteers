@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<div id="navHead">
+    <nav id="sitenav">
+        <ul>
+            <li><a th:href="@{/index}">主页</a></li>
+            <li><a th:href="@{/toEvent}">志愿活动</a></li>
+            <li><a th:href="@{/lovelist/toLoveList}">爱心榜</a></li>
+            <li><a th:href="@{/notice/toNoticeList}">社区公告</a></li>
+            <li><a th:href="@{/admin/index}">个人中心</a></li>
+            <li th:if="${session.user?.username}==null"><a th:href="@{/toLogin}">登录</a></li>
+            <li th:if="${session.user?.username}!=null" th:text="欢迎+${session.user?.username}+登录志愿服务中心" style="color: white;line-height: 30px;"></li>
+
+
+
+        </ul>
+
+    </nav>
+</div>
+
+<div id="commonRight">
+    <h2>About WE志愿</h2>
+    <p>WE志愿是基于springboot的社区志愿者服务系统，仅用于学习用途。此系统会发布社区最新的志愿者服务活动及社区新闻等，志愿者可在该系统进行报名。该系统涵盖的功能有活动查询，活动报名，活动分类，查看公告等，使用过程中有任何问题请联系管理员邮箱1687184886@qq.com</p>
+
+    <h2>活动类别</h2>
+    <ul id="eventTypeList">
+
+        <!--	<li><a href="#">Web Design</a>(4)</li>-->
+        <!--	<li><a href="#">Graphics Design</a>(8)</li>-->
+        <!--	<li><a href="#">Computers</a>(12)</li>-->
+        <!--	<li><a href="#">Typography</a>(3)</li>-->
+        <!--	<li><a href="#">Photogrphy</a>(4)</li>-->
+        <!--	<li><a href="#">Mathematics</a>(5)</li>-->
+        <!--	<li><a href="#">General News</a>(24)</li>-->
+        <!--	<li><a href="#">Music and Entertainment</a>(1)</li>-->
+
+
+    </ul>
+    <h2>最新活动</h2>
+
+    <ul id="dateList">
+
+        <!--	<li><a href="#">Web Design</a></li>-->
+        <!--	<li><a href="#">Graphics Design</a></li>-->
+        <!--	<li><a href="#">Computers</a></li>-->
+        <!--	<li><a href="#">Typography</a></li>-->
+        <!--	<li><a href="#">Photogrphy</a></li>-->
+        <!--	<li><a href="#">Mathematics</a></li>-->
+        <!--	<li><a href="#">General News</a></li>-->
+        <!--	<li><a href="#">Music and Entertainment</a></li>-->
+
+
+    </ul>
+
+
+
+</div>
+
+<div id="copyRightFoot">
+    <div class="copyright">
+         &copy; 2022 Welcome To WE志愿
+    </div>
+<!--    <div class="credit">-->
+<!--        <a href="http://www.moobnn.com/" title="网站模板" target="_blank">网站模板</a> by CSSHeaven.org </div>-->
+
+<!--</div>-->
+</div>>
+</body>
+</html>

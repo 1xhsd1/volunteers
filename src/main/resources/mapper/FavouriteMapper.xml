@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.volunteers.dao.FavouriteMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.volunteers.entity.Favourite">
+        <id column="id" property="id" />
+        <result column="eventId" property="eventId" />
+        <result column="addDate" property="addDate" />
+        <result column="username" property="username" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, eventId, addDate, username
+    </sql>
+
+    <select id="queryList" resultType="com.volunteers.entity.Favourite">
+        SELECT t_favourite.*,t_event.eventId temId,   t_event.title
+        FROM t_event, t_favourite
+        WHERE t_event.eventId=t_favourite.eventId AND t_favourite.username LIKE #{username}
+        ORDER BY t_favourite.addDate desc
+    </select>
+
+</mapper>

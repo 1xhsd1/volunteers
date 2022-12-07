@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.volunteers.dao.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.volunteers.entity.User">
+        <id column="userId" property="userId" />
+        <result column="serviceTime" property="serviceTime" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="nickName" property="nickName" />
+        <result column="profile" property="profile" />
+        <result column="isManager" property="isManager" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        userId, serviceTime, username, password, nickName, profile, isManager
+    </sql>
+
+    <select id="queryBloggerList" parameterType="String" resultType="com.volunteers.entity.User">
+        select username from t_user where username=#{username}
+    </select>
+
+
+</mapper>

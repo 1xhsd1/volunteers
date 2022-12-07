@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.volunteers.dao.EventtypeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.volunteers.entity.Eventtype">
+        <id column="typeId" property="typeId" />
+        <result column="typeName" property="typeName" />
+        <result column="orderNo" property="orderNo" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        typeId, typeName, orderNo
+    </sql>
+
+    <select id="findEventTypeNameAndEventCount" resultType="com.volunteers.entity.Eventtype">
+        <!-- 查询每个活动分类下的博客名称及活动数量 -->
+        SELECT t.typeId,t.typeName,COUNT(b.eventId) eventCount FROM t_eventtype t
+        LEFT JOIN t_event b ON t.`typeId` = b.`type`
+        GROUP BY t.`typeName`
+
+    </select>
+
+</mapper>

@@ -1,0 +1,214 @@
+<!doctype html>
+<!--[if lt IE 7 ]><html lang="en" class="ie6 ielt7 ielt8 ielt9"><![endif]--><!--[if IE 7 ]><html lang="en" class="ie7 ielt8 ielt9"><![endif]--><!--[if IE 8 ]><html lang="en" class="ie8 ielt9"><![endif]--><!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]--><!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>WE志愿服务中心</title>
+	<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+	<!--[if IE]>
+
+
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<!--[if IE 6]>
+	<script src="/js/belatedPNG.js"></script>
+	<script>
+		DD_belatedPNG.fix('*');
+	</script>
+	<![endif]-->
+	<script th:src="@{/js/jquery-1.4.min.js}" type="text/javascript" charset="utf-8"></script>
+	<script th:src="@{/js/leftmenu.js}" type="text/javascript" charset="utf-8"></script>
+	<script th:src="@{/js/loopedslider.js}" type="text/javascript" charset="utf-8"></script>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--	<link href="/css/bootstrap.min.css" rel="stylesheet">-->
+	<link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+	<!--	<link href="/css/site.css" rel="stylesheet">-->
+
+	<!--		ueditor编辑器样式文件引入-->
+	<link rel="stylesheet" type="text/css" href="/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/easyui/themes/icon.css">
+	<script type="text/javascript" src="/easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="/easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="/easyui/easyui-lang-zh_CN.js"></script>
+
+	<script type="text/javascript"  src="/ueditor/ueditor.config.js"></script>
+	<script type="text/javascript"  src="/ueditor/ueditor.all.min.js"> </script>
+	<!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+	<!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+	<script type="text/javascript" src="/ueditor/lang/zh-cn/zh-cn.js"></script>
+	<script type="text/javascript">
+
+
+		function submitData() {
+			//获取社区公告标题
+			var title = $("#title").textbox("getValue");
+			//获取社区公告简介
+			var summary = $("#summary").textbox("getValue");
+
+			//获取社区公告图片
+			var img = $("#img").val();
+			//获取社区公告内容
+			var content = UE.getEditor('editor').getContent();
+
+
+			//非空验证
+			if (title.length == 0) {
+				$.messager.alert("系统提示", "社区公告标题不能为空！", "info");
+			}  else if (content.length == 0) {
+				$.messager.alert("系统提示", "社区公告内容不能为空！", "info");
+			}else if (summary.length == 0) {
+				$.messager.alert("系统提示", "社区公告简介不能为空！", "info");
+			}
+			// else if (img.length == 0) {
+			// 	$.messager.alert("系统提示", "社区公告图片不能为空！", "info");
+			// }
+			else {
+				var contentNoTag = UE.getEditor('editor').getContentTxt();//获取纯文本
+				var summary = UE.getEditor('editor').getContentTxt().substr(0,155);//获取纯文本
+				//提交到服务器的参数列表
+				var param = {
+					"title": title,
+					"content": content,
+					"summary": summary,
+					"img":img,
+					"contentNoTag":contentNoTag,
+
+				};
+				//发送提交请求
+				$.post("/admin/notice/addNotice", param, function (data) {
+					if (data.success) {
+						$.messager.show({
+							title: '系统提示',
+							msg: '活动发布成功',
+							timeout: 3000,
+							showType: 'slide'
+						});
+						//将表单清空
+						resultValue();
+					}else{
+						$.messager.show({
+							title: '系统提示',
+							msg: '活动发布失败',
+							timeout: 3000,
+							showType: 'slide'
+						});
+					}
+				}, "json");
+			}
+		}
+
+		/**
+		 * 清空表单
+		 */
+		function resultValue(){
+			$("#title").textbox("setValue","");
+			//$("#blogTypeId").combobox("setValue","");
+			UE.getEditor('editor').setContent('');
+			//$("#site").textbox("setValue","");
+			$("#img").textbox("setValue","");
+			$("#releaseDate").textbox("setValue","");
+			$("#summary").textbox("setValue","");
+		}
+	</script>
+	<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+<body>
+<div id="bodywrap">
+	<section id="pagetop" th:insert="foreign/common :: #navHead">
+
+	</section>
+	<header id="pageheader">
+		<h1>
+			WE<span>志愿</span>
+		</h1>
+	</header>
+
+	<div style="margin-left: 50px;margin-top: 15px">
+		<form th:action="@{/uploadNotice}" method="post" enctype="multipart/form-data"  class="ui form">
+			<span style="font-size: 13px">图片:&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			<input type="file" class="easyui-linkbutton" name="file">
+			<input type="submit" value="上传">
+		</form>
+	</div>
+
+	<div id="contents">
+		<section id="main">
+			<div id="p" title="发布社区公告" style="height: auto;padding-left: 10px;margin-left: 10px">
+				<table cellspacing="20px">
+					<input type="hidden" th:value="${fileName}" name="img" id="img">
+
+
+					<tr>
+						<td width="80px">公告标题：</td>
+						<td>
+							<input  class="easyui-textbox" type="text" id="title" name="title" style="width: 400px" required/>
+						</td>
+					</tr>
+
+					<tr>
+						<td width="80px">公告简介：</td>
+						<td>
+							<input  class="easyui-textbox" type="text" id="summary" name="summary" style="width: 400px" required/>
+						</td>
+					</tr>
+
+<!--					<tr>-->
+<!--						<td width="80px">图片：</td>-->
+<!--						<td>-->
+<!--							<input  class="easyui-textbox" type="text" id="img" name="img" style="width: 400px" required/>-->
+<!--						</td>-->
+<!--					</tr>-->
+<!--					<tr>-->
+<!--						<td width="80px">图片：</td>-->
+<!--						<td>-->
+<!--							<form enctype="multipart/form-data" method="post" action="/upload">-->
+<!--								<input type="file"  id="img" name="img" style="width: 400px"/>-->
+<!--							</form>-->
+<!--						</td>-->
+<!--					</tr>-->
+
+					<tr>
+						<td valign="top">公告内容：</td>
+						<td>
+							<textarea id="editor" name="content" type="text/plain" style="width: 100%;height: 300px;"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<a href="javascript:submitData()" class="easyui-linkbutton" data-options="iconCls:'icon-submit'">发布公告</a><span></span>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<!-- 实例化编辑器 -->
+			<script type="text/javascript">
+				var ue = UE.getEditor('editor');//参数是要渲染的id
+			</script>
+
+			<div id="leftcontainer">
+
+				<div class="clear"></div>
+			</div>
+		</section>
+		<section id="sidebar">
+			<div id="sidebarwrap" th:insert="admin/common :: #leftNav">
+
+			</div>
+		</section>
+
+		<div class="clear"></div>
+	</div>
+
+</div>
+<footer id="pagefooter">
+	<div id="footerwrap" th:insert="foreign/common :: #copyRightFoot">
+
+	</div>
+</footer>
+
+</body>
+
+</html>

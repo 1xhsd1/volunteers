@@ -1,0 +1,117 @@
+<!doctype html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <meta charset="UTF-8" />
+    <title>WE志愿服务中心</title>
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if IE 6]>
+    <script src="js/belatedPNG.js"></script>
+    <script>
+        DD_belatedPNG.fix('*');
+    </script>
+    <![endif]-->
+    <script th:src="@{/js/jquery-1.4.min.js}" type="text/javascript" charset="utf-8"></script>
+    <script th:src="@{/js/leftmenu.js}" type="text/javascript" charset="utf-8"></script>
+    <script th:src="@{/js/loopedslider.js}" type="text/javascript" charset="utf-8"></script>
+
+
+
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+    <script type="text/javascript" charset="utf-8">
+        $(function(){
+            $('#slider').loopedSlider({
+                autoStart: 6000,
+                restart: 5000
+            });
+
+        });
+
+
+    </script>
+</head>
+
+<body>
+<div id="bodywrap">
+    <section id="pagetop" th:insert="foreign/common :: #navHead">
+        <!--<p id="siteinfo">-->
+        <!--Put your Caption of Phone Number // +123 456789-->
+        <!--</p>-->
+
+    </section>
+    <header id="pageheader">
+        <h1>
+            WE<span>志愿</span>
+        </h1>
+    </header>
+    <div id="contents">
+        <section id="main">
+            <!--			<section id="normalheader">-->
+
+            <!--			</section>-->
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <!--					<th scope="col">报名日期</th>-->
+                    <th scope="col">申请日期</th>
+                    <th scope="col">申请人</th>
+                    <th scope="col">申请活动</th>
+                    <th scope="col">操作</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="enroll:${enrollList}">
+                    <td th:text="${#dates.format(enroll.enrollDate,'yyyy年MM月dd日HH:mm:ss')}"></td>
+                    <td th:text="${session.user?.username}"></td>
+                    <td><a th:href="@{/event/view/}+${enroll.temId}"  th:text="${enroll.title}"></a></td>
+                    <td><a th:href="@{/admin/enroll/success/}+${enroll.id}"><button type="button" class="btn btn-success btn-xs">通过</button></A>&nbsp;<a th:href="@{/admin/enroll/refuse/}+${enroll.id}">
+                        <button type="button" class="btn btn-danger btn-xs">驳回</button></a></td>
+                </tr>
+                <!--				<tr>-->
+                <!--					<th scope="row">2</th>-->
+                <!--					<td>Jacob</td>-->
+                <!--					<td>Thornton</td>-->
+                <!--					<td>@fat</td>-->
+                <!--				</tr>-->
+                <!--				<tr>-->
+                <!--					<th scope="row">3</th>-->
+                <!--					<td colspan="2">Larry the Bird</td>-->
+                <!--					<td>@twitter</td>-->
+                <!--				</tr>-->
+                </tbody>
+            </table>
+            <p th:if="${#lists.isEmpty(enrollList)}" style="font-size: 15px;text-align: center">这里空空如也~~</p>
+
+            <div id="leftcontainer">
+
+                <div class="clear"></div>
+            </div>
+        </section>
+        <section id="sidebar">
+            <div id="sidebarwrap" th:insert="admin/common :: #leftNav">
+
+
+
+            </div>
+        </section>
+
+
+
+        <div class="clear"></div>
+    </div>
+
+</div>
+<!--<footer id="pagefooter">-->
+<!--	<div id="footerwrap" th:insert="foreign/common :: #copyRightFoot">-->
+
+<!--	</div>-->
+<!--</footer>-->
+</body>
+</html>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.volunteers.dao.EventMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.volunteers.entity.Event">
+        <id column="eventId" property="eventId" />
+        <result column="title" property="title" />
+        <result column="releaseDate" property="releaseDate" />
+        <result column="cilckHit" property="cilckHit" />
+        <result column="replyHit" property="replyHit" />
+        <result column="site" property="site" />
+        <result column="type" property="type" />
+        <result column="runDate" property="runDate" />
+        <result column="needScale" property="needScale" />
+        <result column="haveScale" property="haveScale" />
+        <result column="content" property="content" />
+        <result column="summary" property="summary" />
+        <result column="typeName" property="typeName" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        eventId, title, releaseDate, cilckHit, replyHit, site, type , runDate, needScale, haveScale, content, summary, typeName
+    </sql>
+
+    
+    <select id="findEventDateAndCount" resultType="com.volunteers.entity.Event">
+        SELECT DATE_FORMAT(releaseDate,'%Y年%m月') releaseDateStr,
+               COUNT(1) eventCount FROM t_event
+        GROUP BY DATE_FORMAT(releaseDate,'%Y年%m月')
+        ORDER BY DATE_FORMAT(releaseDate,'%Y年%m月') DESC
+    </select>
+    
+    <!-- 分页查询志愿活动 -->
+    <select id="findEventByPage" resultType="com.volunteers.entity.Event">
+        select * from t_event b
+        <where>
+            <if test="event.type!=null">
+                and b.type = #{event.type}
+            </if>
+            <if test="event.releaseDateStr!=null and event.releaseDateStr!=''">
+                and date_format(b.releaseDate,'%Y年%m月') = #{event.releaseDateStr}
+            </if>
+            <if test="event.title!=null">
+                and b.title like concat('%', #{event.type}, '%')
+            </if>
+        </where>
+        order by b.releaseDate desc
+    </select>
+
+    <resultMap id="eventTypeResultMap"
+               type="com.volunteers.entity.Event" extends="BaseResultMap">
+        <!-- 关联活动类别 -->
+        <association property="eventtype" javaType="com.volunteers.entity.Eventtype">
+            <id property="typeId" column="type_id"/>
+            <result property="typeName" column="typeName"/>
+        </association>
+    </resultMap>
+
+    <select id="findEventById" resultMap="eventTypeResultMap">
+        SELECT b.* ,t.typeId type_id,t.typeName FROM t_event b
+        INNER JOIN t_eventtype t ON b.type = t.typeId
+        where b.eventId = #{id}
+    </select>
+
+    <select id="findAllEvent" resultType="com.volunteers.entity.Event">
+        SELECT t_event.*, t_eventtype.typename typeName
+        FROM t_event, t_eventtype
+        WHERE t_event.type=t_eventtype.`typeId`
+        ORDER BY releaseDate DESC
+    </select>
+
+</mapper>

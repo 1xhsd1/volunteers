@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.volunteers.dao.LovelistMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.volunteers.entity.Lovelist">
+        <id column="id" property="id" />
+        <result column="summary" property="summary" />
+        <result column="content" property="content" />
+        <result column="title" property="title" />
+        <result column="releasseDate" property="releasseDate" />
+        <result column="img" property="img" />
+
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, summary, content, title, releasseDate, img
+    </sql>
+
+</mapper>

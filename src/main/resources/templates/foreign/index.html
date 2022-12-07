@@ -1,0 +1,168 @@
+<!doctype html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>WE志愿服务中心</title>
+    <link th:href="@{/css/swiper-bundle.min.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+
+
+    <!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!--[if IE 6]>
+<script th:src="@{/js/belatedPNG.js}"></script>
+<script>
+	DD_belatedPNG.fix('*');
+</script>
+<![endif]-->
+<script th:src="@{/js/jquery-1.4.min.js}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/leftmenu.js}" type="text/javascript" charset="utf-8"></script>
+<script th:src="@{/js/loopedslider.js}" type="text/javascript" charset="utf-8"></script>
+<!--轮播图-->
+<script  th:src="@{/js/swiper-bundle.min.js}" type="text/javascript" charset="utf-8"></script>
+
+<script type="text/javascript" charset="utf-8">
+	$(function(){
+		$('#slider').loopedSlider({
+			autoStart: 6000,
+			restart: 5000
+		});
+		
+	});
+</script>
+
+</head>
+
+<body>
+
+
+<div id="bodywrap">
+    <section id="pagetop" th:insert="foreign/common :: #navHead">
+
+
+</section>
+<header id="pageheader">
+
+<h1>
+    WE<span>&nbsp;志愿</span>
+</h1>
+
+
+    <div id="search">
+
+<form th:action="@{/event/query}" method="post">
+
+<div class="searchfield">
+
+
+<input type="text" name="keyWord" id="keyWord">
+
+</div>
+<div class="searchbtn">
+<input type="image" src="/images/searchbtn.png" alt="search">
+</div>
+
+</form>
+
+</div>
+</header>
+<div id="contents">
+<section id="main">
+<section id="featured">
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img th:src="@{/images/turn1.jpg}" style="width: 609px; height: 247px;"></div>
+            <div class="swiper-slide"><img th:src="@{/images/turn2.jpg}" style="width: 609px; height: 247px;"></div>
+            <div class="swiper-slide"><img th:src="@{/images/turn3.jpg}" style="width: 609px; height: 247px;"></div>
+        </div>
+        <!-- 如果需要分页器 -->
+        <div class="swiper-pagination"></div>
+
+        <!-- 如果需要导航按钮 -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+
+
+    </div>
+    <script>
+        var mySwiper = new Swiper ('.swiper', {
+            // direction: 'vertical', // 垂直切换选项
+            loop: true, // 循环模式选项
+
+
+            // 如果需要分页器
+            pagination: {
+                el: '.swiper-pagination',
+            },
+
+            // 如果需要前进后退按钮
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+
+        })
+    </script>
+
+
+</section>
+<div id="leftcontainer">
+<h2 class="mainheading">
+热点志愿活动
+
+</h2>
+  <div>
+    <ul>
+      <li th:each="event:${eventList}">
+<article class="post">
+<header>
+<h3><a th:href="@{/event/view/}+${event.eventId}" th:text="${event.title}">${event.title}</a></h3>
+<p class="postinfo">发布于 <a th:text="${#dates.format(event.releaseDate,'yyyy年MM月dd日')}" th:href="@{/event/view/}+${event.eventId}"></a></p>
+</header>
+<p th:text="${event.summary}">
+ <a th:href="@{/about}">Read More</a></p>
+
+<footer>
+<!--<span class="author">Authorname</span>-->
+<span class="permalink"><a href="#" th:text="阅读+${event.cilckHit}"></a></span>
+<span class="comments"><a href="#" th:text="评论+${event.replyHit}"></a></span>
+</footer>
+</article>
+      </li>
+    </ul>
+  </div>
+
+<!--<span class="current">1</span><a href="/page/2/" title="2">2</a><a href="/page/3/" title="3">3</a><a href="/page/4/" title="4">4</a><a href="/page/5/" title="5">5</a><a href="/page/6/" title="6">6</a><a href="/page/7/" title="7">7</a><a href="/page/8/" title="8">8</a><a href="/page/2/">Next &raquo;</a><span class="extend">...</span><a href="/page/27/" title="Last &raquo;">Last &raquo;</a></div>-->
+    <div>
+        <nav th:utext="${pageCode}"></nav>
+    </div>
+
+    <div class="clear"></div>
+</div>
+</section>
+<section id="sidebar">
+<div id="sidebarwrap" th:insert="foreign/common :: #commonRight">
+
+</div>
+</section>
+
+<!--    <div style="text-align: center">-->
+<!--        <nav th:utext="${pageCode}"></nav>-->
+<!--    </div>-->
+
+
+
+<div class="clear"></div>
+</div>
+
+</div>
+<footer id="pagefooter">
+<div id="footerwrap" th:insert="foreign/common :: #copyRightFoot">
+
+</div>
+</footer>
+</body>
+</html>

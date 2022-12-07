@@ -1,0 +1,102 @@
+<!doctype html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>WE志愿服务中心</title>
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!--[if IE 6]>
+<script src="js/belatedPNG.js"></script>
+<script>
+	DD_belatedPNG.fix('*');
+</script>
+<![endif]-->
+	<script th:src="@{/js/jquery-1.4.min.js}" type="text/javascript" charset="utf-8"></script>
+	<script th:src="@{/js/leftmenu.js}" type="text/javascript" charset="utf-8"></script>
+	<script th:src="@{/js/loopedslider.js}" type="text/javascript" charset="utf-8"></script>
+
+<script>
+	$(document).ready(function(){
+		$("#username").text(sessionStorage.getItem('USER_NAME'));
+	})
+</script>
+
+<script type="text/javascript" charset="utf-8">
+	$(function(){
+		$('#slider').loopedSlider({
+			autoStart: 6000,
+			restart: 5000
+		});
+		
+	});
+</script> 
+</head>
+
+<body>
+<div id="bodywrap">
+<section id="pagetop" th:insert="foreign/common :: #navHead">
+<!--<p id="siteinfo">-->
+<!--Put your Caption of Phone Number // +123 456789-->
+<!--</p>-->
+
+</section>
+<header id="pageheader">
+<h1>
+grey<span>blog</span>
+</h1>
+</header>
+<div id="contents">
+<section id="main">
+<section id="normalheader">
+
+</section>
+<div id="leftcontainer">
+<h2 class="mainheading"> greyBlog 简介</h2>
+<article class="post" style="font-size: 12px; line-height: 2em">
+	<p>
+		greyBlog是一个多用户博客系统，该系统用于用户之间通过发表博客的方式交流和学习。
+	</p>
+	<p>
+		greyBlog中包含各类博客，如c/c++、java等，用户可以自由选择自己感兴趣的文章进行阅读，同时，用户也可以发布自己的文章供其他用户学习借鉴。
+	</p>
+<p>
+	greyBlog旨在打造一个圈内用户友好学习交流的平台，以供用户们更好的学习。同时，用户页可以在博客中记录下自己学习心得和各种学习笔记，努力走好成功路上的每一步。
+	要知道，每一个成功大佬的背后都从写自己博客开始！！
+</p>
+<p>
+	希望greyBlog能带给大家一个良好的体验！
+<!--<p>Integer sit amet velit erat, vitae mollis libero. Vivamus ac interdum tellus. Integer arcu velit, dapibus ultrices aliquam nec, viverra ut turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean at libero turpis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris non lacus lorem. Aenean est sem, dapibus sed ultrices vitae, vulputate non sapien. Nullam vulputate erat et quam imperdiet accumsan vitae elementum ante. Vestibulum scelerisque libero ligula. In in nibh lacus, sit amet dignissim purus. Nulla scelerisque, nibh quis tincidunt convallis, velit nibh tristique massa, sit amet ornare est orci vitae nisi. </p>-->
+<!--<p>Nunc molestie ante quis ante gravida vitae volutpat ligula egestas. Nam a metus risus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. </p>-->
+
+
+<!--<p>-->
+<!--Vestibulum elit risus, congue interdum aliquet et, tempor sit amet est. Phasellus rhoncus dictum pharetra. In dictum scelerisque lobortis. In hac habitasse platea dictumst. Nam quis suscipit lectus. Praesent tortor risus, tempor sed euismod non, aliquet eget sem. Suspendisse mi nunc, mattis fringilla mollis quis, laoreet a sapien. Ut suscipit, mauris non mattis pharetra, lacus mi tempor lacus, sed tincidunt nisi mauris eu ipsum. </p>-->
+<!--<p>Pellentesque vel erat ac elit ultrices dignissim a ut velit. Donec laoreet sem a turpis viverra ut aliquet odio interdum. Nunc consequat rhoncus vehicula. Cras iaculis enim in neque hendrerit eget laoreet mi adipiscing. </p>-->
+</article>
+<div class="clear"></div>
+</div>
+</section>
+<section id="sidebar">
+<div id="sidebarwrap" th:insert="foreign/common :: #commonRight">
+
+
+
+</div>
+</section>
+
+
+
+<div class="clear"></div>
+</div>
+
+</div>
+<footer id="pagefooter">
+<div id="footerwrap" th:insert="foreign/common :: #copyRightFoot">
+
+</div>
+</footer>
+</body>
+</html>

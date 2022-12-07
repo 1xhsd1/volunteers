@@ -1,0 +1,190 @@
+<!doctype html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>-->
+<meta charset="UTF-8" />
+<title>WE志愿服务中心</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">-->
+<!--    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">-->
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!--[if IE 6]>
+<script th:src="@{/js/belatedPNG.js}"></script>
+<script>
+	DD_belatedPNG.fix('*');
+</script>
+<![endif]-->
+    <script th:src="@{/js/jquery-1.4.min.js}" type="text/javascript" charset="utf-8"></script>
+    <script th:src="@{/js/leftmenu.js}" type="text/javascript" charset="utf-8"></script>
+    <script th:src="@{/js/loopedslider.js}" type="text/javascript" charset="utf-8"></script>
+
+    <!--    uediter-->
+<!--    <script type="text/javascript"-->
+<!--            th:src="@{/ueditor/third-party/SyntaxHighlighter/shCore.js}"></script>-->
+<!--    <link rel="stylesheet"-->
+<!--          th:href="@{/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css}">-->
+
+
+<script type="text/javascript" charset="utf-8">
+	$(function(){
+		$('#slider').loopedSlider({
+			autoStart: 6000,
+			restart: 5000
+		});
+		
+	});
+
+	function feedback(){
+        var addInfo = '[[${session.addInfo}]]';
+        alert(addInfo);
+    }
+
+	function timeCompare(){
+	    var myDate = new Date().toLocaleString();
+        if(myDate>'[[${event.releaseDate}]]'){
+            alert("活动未开启报名通道");
+            return false;
+        }
+        if(myDate>'[[${event.runDate}]]'){
+            alert("活动已过期");
+            return false;
+        }
+	    return true;
+    }
+</script>
+
+</head>
+
+<body>
+<div id="bodywrap">
+<section id="pagetop" th:insert="foreign/common :: #navHead">
+
+</section>
+<header id="pageheader">
+<h1>
+WE<span>志愿</span>
+</h1>
+<!--<div id="search">-->
+
+<!--<form action="#">-->
+
+<!--<div class="searchfield">-->
+
+
+<!--<input type="text" name="search" id="s">-->
+
+<!--</div>-->
+<!--<div class="searchbtn">-->
+<!--<input type="image" src="images/searchbtn.png" alt="search">-->
+<!--</div>-->
+
+<!--</form>-->
+
+<!--</div>-->
+</header>
+<div id="contents">
+<section id="main">
+<div id="leftcontainer">
+  <article class="post">
+  <header>
+      <strong th:text="${event.title}" style="font-size: 30px;"></strong>
+      <br>      <br>
+
+      <p class="postinfo">&nbsp;&nbsp;[[${event.cilckHit}]]阅读&nbsp&nbsp活动类型：[[${event.eventtype.typeName}]]</p>
+<!--      <strong>作者：</strong>-->
+<!--      <span th:text="${blog.username}"></span>-->
+      <br>
+
+      <strong>报名时间：</strong>
+      <time th:text="${#dates.format(event.releaseDate,'yyyy-MM-dd HH:mm:ss')}"></time>
+      <br>      <br>
+
+      <strong>截至时间：</strong>
+      <time th:text="${#dates.format(event.runDate,'yyyy-MM-dd HH:mm:ss')}"></time>
+      <br>      <br>
+
+      <strong>活动地点：</strong>
+      <span th:text="${event.site}"></span>
+      <br>      <br>
+
+      <strong>所需志愿者：</strong>
+      <span th:text="${event.needScale}"></span>
+      <br>      <br>
+
+      <strong>已报名人数：</strong>
+      <span th:text="${event.haveScale}"></span>
+      <br>      <br>
+
+  </header>
+      <div th:utext="${event.content}" ></div>
+<!--Important--><div class="clear"></div>
+</article>
+<div class="clear"></div>
+    <a th:href="@{/enroll/toEnrollForm/}+${event.eventId}"><button type="button" class="btn btn-info" onclick="return timeCompare()">进入报名</button></a>
+    <a th:href="@{/favourite/addFavourite/}+${event.eventId}"><button type="button" class="btn btn-info" onclick="feedback()" style="float: right">加入收藏</button></a>
+
+    <section id="comments">
+
+    <br>   <br>
+<h3>[[${event.replyHit}]] 评论</h3>
+<div id="commentlist">
+
+
+    <div th:if="${#lists.isEmpty(commentList)}">
+        <article class="entry">
+            <div class="comment">还没有评论，快点来抢沙发吧！</div>
+        </article>
+    </div>
+    <div th:if="${not#lists.isEmpty(commentList)}">
+        <article class="entry" th:each="comment, sta:${commentList}">
+            <div class="avatar">
+            <p class="author"><span class="name">[[${sta.count}]]楼:&nbsp;&nbsp;[[${comment.username}]]</span>
+            <time class="date" th:text="${#dates.format(comment.commentDate,'yyyy-MM-dd HH:mm:ss')}"></time></p>
+            <div class="comment"><p th:text="${comment.content}"></p></div>
+            </div>
+        </article>
+    </div>
+
+<div class="clear"></div>
+
+
+</div>
+
+ <h3 id="respond"></h3>
+<form th:action="@{/comment/addComment}" th:method="post" id="commentform" class="form-inline">
+<!--    隐藏域-->
+    <input id="eventId" type="hidden" th:value="${event.eventId}" name="eventId">
+    <p><input class="form-control" name="comments"  type="text" th:placeholder="来说两句吧......">
+        <input type="submit" value="发表" class="btn btn-info"></p>
+</form>
+
+</section>
+</div>
+</section>
+<section id="sidebar">
+<div id="sidebarwrap" th:insert="foreign/common :: #commonRight">
+
+
+</div>
+</section>
+
+
+
+<div class="clear"></div>
+</div>
+
+</div>
+<footer id="pagefooter">
+<div id="footerwrap" th:insert="foreign/common :: #copyRightFoot">
+
+</div>
+</footer>
+</body>
+</html>

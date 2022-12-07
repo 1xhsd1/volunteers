@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html  lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Purple_loginform Website Template | Home :: w3layouts</title>
+    <link href="/css/login.css" rel="stylesheet" type="text/css" media="all" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- -->
+    <script>var __links = document.querySelectorAll('a');function __linkClick(e) { parent.window.postMessage(this.href, '*');} ;for (var i = 0, l = __links.length; i < l; i++) {if ( __links[i].getAttribute('data-t') == '_blank' ) { __links[i].addEventListener('click', __linkClick, false);}}</script>
+    <script src="/js/jquery.min.js"></script>
+    <script>$(document).ready(function(c) {
+        $('.alert-close').on('click', function(c){
+            $('.message').fadeOut('slow', function(c){
+                $('.message').remove();
+            });
+        });
+    });
+    </script>
+
+    <script type="text/javascript">
+        function beforeSubmit(form){
+            // 定义用户名正则
+            var uPattern = /^[a-zA-Z0-9_-]{4,16}$/;
+            var pPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[\s\S]{8,16}$/;
+            // var bloggerId = '${bloggerList}';
+            // bloggerId = eval(bloggerId);
+            // console.log("haha");
+            // console.log(bloggerId);
+
+            // if (form.username.value!=''){
+            //     for (var i = 0; i < bloggerId.length; i++){
+            //         if (form.username.value()==bloggerId[i]){
+            //             alert("账号已存在！");
+            //             form.username.focus();
+            //             return false;
+            //         }
+            //     }
+            // }
+
+            if(form.username.value==''){
+                alert('用户名不能为空！');
+                form.username.focus();
+                return false;
+            }
+            // else if (form.username.value.search(uPattern) == -1){
+            //     alert("用户名格式不正确！");
+            //     form.username.focus();
+            //     return false;
+            // }
+
+            else if(form.password.value==''){
+                alert('密码不能为空！');
+                form.password.focus();
+                return false;
+            }
+            // else if (form.password.value.search(pPattern) == -1){
+            //     alert("密码格式不正确！");
+            //     form.password.focus();
+            //     return false;
+            // }
+            else if(form.password2.value==''){
+                alert('密码不能为空！');
+                form.password.focus();
+                return false;
+            }
+            else if (form.password.value != form.password2.value){
+                alert("两次密码不匹配！");
+                form.password2.focus();
+                return false;
+            }
+            else if ([[${flag}]]!=null && [[${flag}]]==1){
+                alert("用户名已存在")
+            }
+            else if ([[${flag}]]!=null && [[${flag}]]==2){
+                alert("注册成功")
+            }
+            else {
+                alert("注册成功！");
+            }
+            //     for (var i = 0; i < '${bloggerList}'.length; i++){
+            //         if (form.password.value()=='${bloggerList[i]}'){
+            //             alert("账号已存在！");
+            //             form.username.focus();
+            //             return false;
+            //         }else {
+            //             alert("注册成功！");
+            //         }
+            //     }
+            // }
+            return true;
+        }
+
+
+
+    </script>
+</head>
+<body>
+<!-- contact-form -->
+<div class="message warning">
+    <div class="inset">
+        <div class="login-head">
+            <h1>注册</h1>
+            <div class="alert-close"> </div>
+        </div>
+        <form method="post" th:action="@{/user/registy}" onSubmit="return beforeSubmit(this);" th:method="post">
+<!--            <label style="float: left;font-size: 10px" >4-16位字母、数字、减号和下划线组成</label>-->
+            <li>
+                <input type="text" name="username" placeholder="账号"><a href="#" class=" icon user"></a>
+            </li>
+<!--            <label style="float: left;font-size: 10px" >账号:4-16位字母、数字、减号和下划线组成</label>-->
+            <div class="clear"> </div>
+<!--            <label style="float: left;font-size: 10px">8-16个字符，至少1个大写字母，1个小写字母和1个数字</label>-->
+            <li>
+                <input type="password" name="password" placeholder="密码" > <a href="#" class="icon lock"></a>
+            </li>
+<!--            <label style="float: left;font-size: 10px">密码:8-16个字符，至少1个大写字母，1个小写字母和1个数字</label>-->
+            <div class="clear"> </div>
+            <li>
+                <input type="password" name="password2" placeholder="再次输入密码" > <a href="#" class="icon lock"></a>
+            </li>
+            <div class="clear"> </div>
+<!--            <p th:if="${flag}==1" style="color: red">用户名已存在！</p>-->
+<!--            <p th:if="${flag}==2" style="color: green">注册成功！</p>-->
+            <div class="submit">
+                <input type="submit" value="确认" >
+
+                <h4 style="float: right"><a th:href="@{/toLogin}">返回登录页面</a></h4>
+
+                <div class="clear">  </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div class="clear"> </div>
+<!--- footer --->
+
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
+</body>
+</html>

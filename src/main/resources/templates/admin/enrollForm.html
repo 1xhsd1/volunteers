@@ -1,0 +1,183 @@
+<!doctype html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>WE志愿服务中心</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if IE 6]>
+    <script src="js/belatedPNG.js"></script>
+    <script>
+        DD_belatedPNG.fix('*');
+    </script>
+    <![endif]-->
+    <script th:src="@{/js/jquery-1.4.min.js}" type="text/javascript" charset="utf-8"></script>
+    <script th:src="@{/js/leftmenu.js}" type="text/javascript" charset="utf-8"></script>
+    <script th:src="@{/js/loopedslider.js}" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+        $(function(){
+            $('#slider').loopedSlider({
+                autoStart: 6000,
+                restart: 5000
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+<div id="bodywrap">
+    <section id="pagetop" th:insert="foreign/common :: #navHead">
+        <!--<p id="siteinfo">-->
+        <!--Put your Caption of Phone Number // +123 456789-->
+        <!--</p>-->
+
+    </section>
+    <header id="pageheader">
+        <h1>
+            grey<span>blog</span>
+        </h1>
+        <!--<div id="search">-->
+
+        <!--<form action="#">-->
+
+        <!--<div class="searchfield">-->
+
+
+        <!--<input type="text" name="search" id="s">-->
+
+        <!--</div>-->
+        <!--<div class="searchbtn">-->
+        <!--<input type="image" src="images/searchbtn.png" alt="search">-->
+        <!--</div>-->
+
+        <!--</form>-->
+
+        <!--</div>-->
+
+        <script type="text/javascript">
+            function beforeSubmit(form){
+                // 定义邮箱正则
+                var reg=/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
+                if(form.mail.value==''){
+                    alert('邮箱不能为空！');
+                    form.username.focus();
+                    return false;
+                }
+                else if (form.mail.value.search(reg) == -1){
+                    alert("邮箱格式不正确！");
+                    form.username.focus();
+                    return false;
+                }
+                else if(form.realName.value==''){
+                    alert('姓名不能为空！');
+                    form.realName.focus();
+                    return false;
+                }
+                else if(form.phone.value==''){
+                    alert('手机号码不能为空！');
+                    form.phone.focus();
+                    return false;
+                }
+                else if(form.identifyNO.value==''){
+                    alert('身份证号码不能为空！');
+                    form.identifyNO.focus();
+                    return false;
+                }
+                else{
+                    alert("预报名成功！");
+                }
+                return true;
+            }
+
+
+
+        </script>
+
+    </header>
+    <div id="contents">
+        <section id="main">
+            <div id="leftcontainer">
+                <section id="normalheader" class="header2">
+
+                </section>
+                <h2>联系我们</h2>
+
+                <article class="post">
+
+                    <form th:action="@{/sendMail}" th:method="post" class="form" onSubmit="return beforeSubmit(this);">
+
+                        <p style="font-size: 20px">您要报名的活动：<strong th:text="${event.title}"></strong></p>
+                        <br>   <br>
+
+                        <p><input hidden="hidden" th:value="${event.eventId}" name="eventId" id="eventId"></p>
+
+                        <p class="textfield">
+                            <label for="realName">
+                                <small>您的真实姓名</small>
+                            </label>
+                            <input name="realName" id="realName" value="" size="22" tabindex="1" type="text">
+
+                        </p>
+
+                        <p class="textfield">
+                            <label for="mail">
+                                <small>您的邮箱 (我们会根据邮箱回复您)</small>
+                            </label>
+                            <input name="mail" id="mail" value="" size="22" tabindex="2" type="text">
+
+                        </p>
+                        <p class="textfield">
+                            <label for="phone">
+                                <small>您的手机号码</small>
+                            </label>
+                            <input name="phone" id="phone" value="" size="22" tabindex="3" type="text">
+
+                        </p>
+                        <p class="textfield">
+                            <label for="identifyNO">
+                                <small>您的身份证号码（请如实填写）</small>
+                            </label>
+                            <input name="identifyNO" id="identifyNO" value="" size="22" tabindex="4" type="text">
+
+                        </p>
+<!--                        <p>-->
+<!--                            <small><strong>正文:</strong> 提出你的意见或建议......</small>-->
+<!--                        </p>-->
+<!--                        <p class="text-area">-->
+<!--                            <textarea name="comment" id="comment" cols="50" rows="10" tabindex="4"></textarea>-->
+<!--                        </p>-->
+                        <p>
+                            <input name="submit" id="submit" tabindex="5" type="submit" style="background: #31c631;color: white;border-radius: 10px;width: 60px;height: 35px;border: none">
+                        </p>
+                        <div class="clear"></div>
+                    </form>
+
+                    <!--Important--><div class="clear"></div>
+                </article>
+            </div>
+        </section>
+        <section id="sidebar">
+            <div id="sidebarwrap" th:insert="foreign/common :: #commonRight">
+
+
+
+            </div>
+        </section>
+
+
+
+        <div class="clear"></div>
+    </div>
+
+</div>
+<footer id="pagefooter">
+    <div id="footerwrap" th:insert="foreign/common :: #copyRightFoot">
+
+    </div>
+</footer>
+</body>
+</html>

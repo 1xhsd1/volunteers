@@ -1,0 +1,97 @@
+spring:
+  application:
+    name: rabbitmq-springboot
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: ems
+    password: 123
+    virtual-host: /
+
+
+    #这个配置是保证提供者确保消息推送到交换机中，不管成不成功，都会回调
+    publisher-confirm-type: correlated
+    #保证交换机能把消息推送到队列中
+    publisher-returns: true
+    listener:
+      simple:
+        #这个配置是保证消费者会消费消息，手动确认
+        acknowledge-mode: manual
+        retry:
+          enabled: true
+          #指定最小的消费者数量
+        concurrency: 5
+        #指定最大的消费者数量
+        max-concurrency: 10
+    template:
+      mandatory: true
+    connection-timeout: 15000
+    
+
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/volunteers?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT&2BB
+    username: root
+    password: mysql
+    # 自定义数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+
+    #Spring Boot 默认是不注入这些属性值的，需要自己绑定,所以就要自己写一个配置类druidConfig来绑定下面这些配置
+    #druid 数据源专有配置
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+
+    #配置监控统计拦截的filters，stat:监控统计、log4j：日志记录、wall：防御sql注入
+    #如果允许时报错  java.lang.ClassNotFoundException: org.apache.log4j.Priority
+    #则导入 log4j 依赖即可，Maven 地址：https://mvnrepository.com/artifact/log4j/log4j
+    filters: stat,wall,log4j
+    maxPoolPreparedStatementPerConnectionSize: 20
+    useGlobalDataSourceStat: true
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+  thymeleaf:
+    prefix: classpath:/templates/
+    check-template-location: true
+    suffix: .html
+    encoding: utf-8
+    mode: LEGACYHTML5
+    cache: false
+
+  aop:
+    auto: true
+    proxy-target-class: true
+
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+
+
+
+  mail:
+    username: 1687184886@qq.com
+    password: wrjanbficgmqfacd
+    host: smtp.qq.com
+    properties.mail.smtp.ssl.enable: true
+
+
+
+#  mybatis:
+#    mapper-locations: classpath:mapper/*.xml
+#    type-aliases-package: com.blog.entity
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.volunteers.entity
+server:
+  port: 8090
