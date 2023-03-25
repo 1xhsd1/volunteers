@@ -26,7 +26,8 @@ public interface CommentService extends IService<Comment> {
      * 根据活动id删除评论
      * @param eventId
      * @return
-     * @throws Exception
+     * where b.video_id = d.id and b.create_time between "2023-02-15 00:00:00" and "2023-02-17 00:00:00"
+     * and b.delete_status = 0 and d.user_id = 5;
      */
     int deleteCommentByEventId(Integer eventId) throws Exception;
 

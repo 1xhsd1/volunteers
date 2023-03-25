@@ -14,7 +14,7 @@
             <li><a th:href="@{/toEvent}">志愿活动</a></li>
             <li><a th:href="@{/lovelist/toLoveList}">爱心榜</a></li>
             <li><a th:href="@{/notice/toNoticeList}">社区公告</a></li>
-            <li><a th:href="@{/admin/index}">个人中心</a></li>
+            <li><a th:href="@{/user/admin/myInfo}">个人中心</a></li>
             <li th:if="${session.user?.username}==null"><a th:href="@{/toLogin}">登录</a></li>
             <li th:if="${session.user?.username}!=null" th:text="欢迎+${session.user?.username}+登录志愿服务中心" style="color: white;line-height: 30px;"></li>
 

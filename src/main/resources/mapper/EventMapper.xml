@@ -17,11 +17,12 @@
         <result column="content" property="content" />
         <result column="summary" property="summary" />
         <result column="typeName" property="typeName" />
+        <result column="eventTime" property="eventTime" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        eventId, title, releaseDate, cilckHit, replyHit, site, type , runDate, needScale, haveScale, content, summary, typeName
+        eventId, title, releaseDate, cilckHit, replyHit, site, type , runDate, needScale, haveScale, content, summary, typeName, eventTime
     </sql>
 
     

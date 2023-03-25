@@ -87,7 +87,7 @@ public class EventAdminController {
 
 
     /**
-     * 删除博客
+     * 删除志愿活动
      * @param id
      * @return
      * @throws Exception

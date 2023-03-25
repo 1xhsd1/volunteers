@@ -1,8 +1,13 @@
 package com.volunteers.controller.admin;
 
+import com.volunteers.dao.UserMapper;
 import com.volunteers.entity.Enroll;
+import com.volunteers.entity.Event;
 import com.volunteers.entity.Favourite;
+import com.volunteers.entity.User;
 import com.volunteers.service.EnrollService;
+import com.volunteers.service.EventService;
+import com.volunteers.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
@@ -18,6 +23,14 @@ import java.util.List;
 public class EnrollAdminController {
     @Resource
     private EnrollService enrollService;
+    @Resource
+    private UserService userService;
+
+    @Resource
+    private EventService eventService;
+
+    @Resource
+    private UserMapper userMapper;
 
     /**
      * 根据用户名查看活动申请
@@ -59,6 +72,18 @@ public class EnrollAdminController {
             Enroll enroll = enrollService.findEnrollById(id);
             enroll.setState(1);
             enrollService.updateEnrollById(enroll);
+
+            //修改个人志愿时长
+            Subject subject = SecurityUtils.getSubject();
+            String username = (String) subject.getPrincipal();
+            User user = userService.findUserByUsername(username);
+
+            Event event = eventService.findEventById(enroll.getEventId());
+
+            //调用修改方法
+            user.setServiceTime(event.getEventTime()+user.getServiceTime());
+            userMapper.updateById(user);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

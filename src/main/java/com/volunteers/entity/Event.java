@@ -88,6 +88,20 @@ private static final long serialVersionUID=1L;
      */
     private String summary;
 
+    /**
+     * 活动持续时间
+     */
+    @TableField("eventTime")
+    private Double eventTime;
+
+    public Double getEventTime() {
+        return eventTime;
+    }
+
+    public void setEventTime(Double eventTime) {
+        this.eventTime = eventTime;
+    }
+
     @TableField(exist = false)
     private String releaseDateStr;
 

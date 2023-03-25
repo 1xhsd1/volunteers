@@ -3,6 +3,7 @@ package com.volunteers.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.volunteers.dao.UserMapper;
 import com.volunteers.entity.Event;
 import com.volunteers.entity.User;
 import com.volunteers.service.EventService;
@@ -37,6 +38,9 @@ import java.util.List;
 public class UserController {
     @Resource
     private UserService userService;
+
+    @Resource
+    private UserMapper userMapper;
 
     /**
      * 用户登录
@@ -75,6 +79,35 @@ public class UserController {
     }
 
     /**
+     * 修改密码
+     * @param username
+     * @param password
+     * @param model
+     * @return
+     * @throws Exception
+     */
+    @PostMapping("/updateCode")
+    public String updateCode(@RequestParam("username")String username,
+                          @RequestParam("password")String password,
+                          Model model)throws Exception{
+//      获取用户
+        Subject subject = SecurityUtils.getSubject();
+        String userName = (String) subject.getPrincipal();
+        User user = userService.findUserByUsername(userName);
+
+        if (user.getPassword()!=username){
+            model.addAttribute("flag",1);
+        }else {
+            //调用修改方法
+            user.setPassword(password);
+            userMapper.updateById(user);
+            model.addAttribute("flag",2);
+
+        }
+        return "admin/updateCode";
+    }
+
+    /**
      * 注册新用户
      * @param username
      * @param password
@@ -105,6 +138,21 @@ public class UserController {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
         return "redirect:/";
+    }
+
+    /**
+     * 查看个人信息
+     * @param model
+     * @return
+     */
+    @RequestMapping("/admin/myInfo")
+    public String myInfo(Model model) throws Exception{
+        Subject subject = SecurityUtils.getSubject();
+        String username = (String) subject.getPrincipal();
+        User user = userService.findUserByUsername(username);
+
+        model.addAttribute("user",user);
+        return "admin/myInfo";
     }
 
 }

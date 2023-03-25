@@ -51,6 +51,7 @@ public class IndexController {
         //将对象放到模型中
         model.addAttribute("eventList",eventList);
         model.addAttribute("pageCode", PageUtil.genPagination("index",eventIPage.getTotal(),current.intValue(),size, null));
+        System.out.println(eventIPage.getTotal());
 //        model.addAttribute("test", "hello");
         return "foreign/index";
     }

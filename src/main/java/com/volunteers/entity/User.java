@@ -27,7 +27,7 @@ private static final long serialVersionUID=1L;
      * 服务时长
      */
     @TableField("serviceTime")
-    private LocalDateTime serviceTime;
+    private Double serviceTime;
 
     /**
      * 用户名
@@ -72,11 +72,11 @@ private static final long serialVersionUID=1L;
         this.userId = userId;
     }
 
-    public LocalDateTime getServiceTime() {
+    public Double getServiceTime() {
         return serviceTime;
     }
 
-    public void setServiceTime(LocalDateTime serviceTime) {
+    public void setServiceTime(Double serviceTime) {
         this.serviceTime = serviceTime;
     }
 

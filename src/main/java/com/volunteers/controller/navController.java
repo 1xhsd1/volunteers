@@ -46,6 +46,16 @@ public class navController {
     }
 
     /**
+     * 导航到注册页面
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/admin/updateCode")
+    public String toUpdateCode() throws Exception{
+        return "admin/updateCode";
+    }
+
+    /**
      * 导航到发布活动页面
      * @return
      */

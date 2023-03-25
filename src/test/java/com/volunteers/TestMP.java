@@ -12,16 +12,16 @@ import org.junit.Test;
 
 public class TestMP {
 
-    private static String author ="xiaohe";//作者名称
+    private static String author ="hedixin";//作者名称
     private static String outputDir ="E:\\";//生成的位置
     private static String driver ="com.mysql.jdbc.Driver";//驱动，注意版本
     //连接路径,注意修改数据库名称
-    private static String url ="jdbc:mysql://localhost:3306/volunteers?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8";
+    private static String url ="jdbc:mysql://localhost:3306/hotelsys?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8";
     private static String username ="root";//数据库用户名
     private static String password ="mysql";//数据库密码
-    private static String tablePrefix ="t_";//数据库表的前缀，如tbl_user
-    private static String [] tables = {"t_comment","t_enroll","t_event","t_eventtype","t_favourite","t_lovelist","t_notice","t_user"};	//生成的表
-    private static String parentPackage = "com.volunteers";//顶级包结构
+    private static String tablePrefix ="h_";//数据库表的前缀，如tbl_user
+    private static String [] tables = {"h_comments","h_community","h_dwellings","h_employees","h_orders","h_rooms","h_type","h_users"};	//生成的表
+    private static String parentPackage = "com.hotelsys";//顶级包结构
     private static String dao = "dao";//数据访问层包名称
     private static String service = "service";//业务逻辑层包名称
     private static String entity = "entity";//实体层包名称

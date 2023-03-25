@@ -21,7 +21,7 @@ public class ShiroConfig {
         LinkedHashMap<String, String> filterMap = new LinkedHashMap<>();
         filterMap.put("/toAdminIndex", "authc");
         filterMap.put("/admin/toWriteBlog", "authc");
-        filterMap.put("/admin/index", "authc");
+        filterMap.put("/user/admin/myInfo", "authc");
         filterMap.put("/toCommentManage", "authc");
         filterMap.put("/favorites/toFavoritesManage","authc");
         filterMap.put("/mail/toMessageManage","authc");

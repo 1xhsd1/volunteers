@@ -43,6 +43,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         user.setUsername(username);
         user.setPassword(password);
         user.setIsManager(SysConstant.NON_MANAGER);
+        user.setServiceTime((double) 0);
         return userMapper.insert(user);
     }
 }

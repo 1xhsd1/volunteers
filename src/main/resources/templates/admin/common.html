@@ -70,7 +70,9 @@
 
 <div id="leftNav">
     <ul>
-
+        <li>
+            <a th:href="@{/user/admin/myInfo}"><i class="icon-white icon-home"></i>我的信息</a>
+        </li>
         <li   th:if="${session.user?.isManager}==1">
             <a th:href="@{/admin/index}"><i class="icon-white icon-home"></i>志愿活动管理</a>
         </li>
@@ -81,13 +83,16 @@
         <li th:if="${session.user?.isManager}==1">
             <a th:href="@{/admin/toNotice}"><i class="icon-folder-open"></i>发布社区公告</a>
         </li>
+        <li th:if="${session.user?.isManager}==1">
+            <a th:href="@{/admin/toWriteEvent}"><i class="icon-folder-open"></i>发布志愿活动</a>
+        </li>
         <li th:if="${session.user?.isManager}==0">
             <a th:href="@{/comment/toCommentManage}"><i class="icon-check"></i> 评论管理</a>
         </li>
-        <li>
+        <li  th:if="${session.user?.isManager}==1">
             <a th:href="@{/admin/toEnrollCheck}"><i class="icon-envelope"></i> 报名申请审批</a>
         </li>
-        <li th:if="${session.user?.isManager}==1">
+        <li th:if="${session.user?.isManager}==0">
             <a th:href="@{/admin/toEnrollView}"><i class="icon-envelope"></i> 报名申请查看</a>
         </li>
         <li th:if="${session.user?.isManager}==0">

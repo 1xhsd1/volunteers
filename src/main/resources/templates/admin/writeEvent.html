@@ -69,6 +69,8 @@
 			 var site = $("#site").textbox("getValue");
 			 //获取人数
 			 var needScale = $("#needScale").val();
+			 //获取活动持续时间
+			 var eventTime = $("#eventTime").val();
 			 //获取开始报名时间
 			 var releaseDate = $("#releaseDate").val();
 			 //获取截至报名时间
@@ -88,6 +90,8 @@
 				$.messager.alert("系统提示", "活动地点不能为空！", "info");
 			} else if (needScale.length == 0) {
 				$.messager.alert("系统提示", "所需人数不能为空！", "info");
+			} else if (eventTime.length == 0) {
+				$.messager.alert("系统提示", "活动持续时间不能为空！", "info");
 			} else if (needScale<1) {
 				$.messager.alert("系统提示", "所需人数设置不正确！", "info");
 			} else if (releaseDate.length == 0) {
@@ -109,7 +113,8 @@
 					"site": site,
 					"needScale": needScale,
 					"releaseDateStr": releaseDate,
-					"runDateStr": runDate
+					"runDateStr": runDate,
+					"eventTime":eventTime
 				};
 				//发送提交请求
 				$.post("/admin/event/addEvent", param, function (data) {
@@ -190,6 +195,12 @@
 						<td width="80px">活动地点：</td>
 						<td>
 							<input  class="easyui-textbox" type="text" id="site" name="site" style="width: 400px" required/>
+						</td>
+					</tr>
+					<tr>
+						<td width="80px">活动持续时间（小时）：</td>
+						<td>
+							<input  class="easyui-textbox" type="number" id="eventTime" name="eventTime" style="width: 400px" required/>
 						</td>
 					</tr>
 					<tr>
