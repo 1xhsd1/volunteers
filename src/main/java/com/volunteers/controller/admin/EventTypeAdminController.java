@@ -24,7 +24,7 @@ public class EventTypeAdminController {
     @RequestMapping("/typeItem")
     public String typeItem(){
         try {
-            //查询活动类别
+            //查询房间类别
             String typeList = eventtypeService.findEventTypeNameAndEventCount();
             return typeList;
         } catch (Exception e) {

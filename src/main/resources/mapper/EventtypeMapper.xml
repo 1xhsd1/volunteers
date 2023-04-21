@@ -15,7 +15,7 @@
     </sql>
 
     <select id="findEventTypeNameAndEventCount" resultType="com.volunteers.entity.Eventtype">
-        <!-- 查询每个活动分类下的博客名称及活动数量 -->
+        <!-- 查询每个房间分类下的博客名称及房间数量 -->
         SELECT t.typeId,t.typeName,COUNT(b.eventId) eventCount FROM t_eventtype t
         LEFT JOIN t_event b ON t.`typeId` = b.`type`
         GROUP BY t.`typeName`

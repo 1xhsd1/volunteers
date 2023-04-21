@@ -33,7 +33,7 @@
         ORDER BY DATE_FORMAT(releaseDate,'%Y年%m月') DESC
     </select>
     
-    <!-- 分页查询志愿活动 -->
+    <!-- 分页查询房间 -->
     <select id="findEventByPage" resultType="com.volunteers.entity.Event">
         select * from t_event b
         <where>
@@ -52,7 +52,7 @@
 
     <resultMap id="eventTypeResultMap"
                type="com.volunteers.entity.Event" extends="BaseResultMap">
-        <!-- 关联活动类别 -->
+        <!-- 关联房间类别 -->
         <association property="eventtype" javaType="com.volunteers.entity.Eventtype">
             <id property="typeId" column="type_id"/>
             <result property="typeName" column="typeName"/>

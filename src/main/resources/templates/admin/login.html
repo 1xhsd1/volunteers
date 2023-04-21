@@ -28,11 +28,11 @@
 <!-- contact-form -->	
 <div class="message warning">
 <div class="inset">
-	<div class="login-head">
+	<div class="login-head" style="opacity: 0.8">
 		<h1>登录</h1>
 		 <div class="alert-close"> </div> 			
 	</div>
-		<form method="post" th:action="@{/user/login}">
+		<form method="post" th:action="@{/user/login}" style="opacity: 0.7">
 			<li>
 				<input type="text" name="username" value="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.placeholder = 'admin';}"><a href="#" class=" icon user"></a>
 			</li>
@@ -56,6 +56,5 @@
 	<div class="clear"> </div>
 <!--- footer --->
 
-<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
 </html>

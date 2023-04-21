@@ -49,11 +49,11 @@
 	function timeCompare(){
 	    var myDate = new Date().toLocaleString();
         if(myDate>'[[${event.releaseDate}]]'){
-            alert("活动未开启报名通道");
+            alert("房间未开启预约通道");
             return false;
         }
         if(myDate>'[[${event.runDate}]]'){
-            alert("活动已过期");
+            alert("房间已过期");
             return false;
         }
 	    return true;
@@ -69,7 +69,7 @@
 </section>
 <header id="pageheader">
 <h1>
-WE<span>志愿</span>
+时尚<span>酒店</span>
 </h1>
 <!--<div id="search">-->
 
@@ -97,34 +97,38 @@ WE<span>志愿</span>
       <strong th:text="${event.title}" style="font-size: 30px;"></strong>
       <br>      <br>
 
-      <p class="postinfo">&nbsp;&nbsp;[[${event.cilckHit}]]阅读&nbsp&nbsp活动类型：[[${event.eventtype.typeName}]]</p>
+      <p class="postinfo">&nbsp;&nbsp;[[${event.cilckHit}]]浏览&nbsp&nbsp房间类型：[[${event.eventtype.typeName}]]</p>
 <!--      <strong>作者：</strong>-->
 <!--      <span th:text="${blog.username}"></span>-->
       <br>
 
-      <strong>报名时间：</strong>
-      <time th:text="${#dates.format(event.releaseDate,'yyyy-MM-dd HH:mm:ss')}"></time>
-      <br>      <br>
+<!--      <strong>报名时间：</strong>-->
+<!--      <time th:text="${#dates.format(event.releaseDate,'yyyy-MM-dd HH:mm:ss')}"></time>-->
+<!--      <br>      <br>-->
 
-      <strong>截至时间：</strong>
-      <time th:text="${#dates.format(event.runDate,'yyyy-MM-dd HH:mm:ss')}"></time>
-      <br>      <br>
+<!--      <strong>截至时间：</strong>-->
+<!--      <time th:text="${#dates.format(event.runDate,'yyyy-MM-dd HH:mm:ss')}"></time>-->
+<!--      <br>      <br>-->
 
-      <strong>活动地点：</strong>
-      <span th:text="${event.site}"></span>
-      <br>      <br>
+<!--      <strong>房间地点：</strong>-->
+<!--      <span th:text="${event.site}"></span>-->
+<!--      <br>      <br>-->
 
 
-      <strong>活动持续时间：</strong>
+      <strong>最长可预约（小时）：</strong>
       <span th:text="${event.eventTime}"></span>
       <br>      <br>
 
-      <strong>所需志愿者：</strong>
+      <strong>共有（间）：</strong>
       <span th:text="${event.needScale}"></span>
       <br>      <br>
 
-      <strong>已报名人数：</strong>
+      <strong>仅剩（间）：</strong>
       <span th:text="${event.haveScale}"></span>
+      <br>      <br>
+
+      <strong>价格：</strong>
+      <span th:text="${event.needScale}"></span>
       <br>      <br>
 
   </header>
@@ -132,7 +136,7 @@ WE<span>志愿</span>
 <!--Important--><div class="clear"></div>
 </article>
 <div class="clear"></div>
-    <a th:href="@{/enroll/toEnrollForm/}+${event.eventId}"><button type="button" class="btn btn-info" onclick="return timeCompare()">进入报名</button></a>
+    <a th:href="@{/enroll/toEnrollForm/}+${event.eventId}"><button type="button" class="btn btn-info" onclick="return timeCompare()">开始预约</button></a>
     <a th:href="@{/favourite/addFavourite/}+${event.eventId}"><button type="button" class="btn btn-info" onclick="feedback()" style="float: right">加入收藏</button></a>
 
     <section id="comments">

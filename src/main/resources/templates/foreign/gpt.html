@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ChatGPT API Demo</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 36px;
+      margin-top: 50px;
+      margin-bottom: 30px;
+    }
+
+    .chat-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+      padding: 30px;
+      overflow-y: auto;
+      height: 400px;
+    }
+
+    .chat-message {
+      display: flex;
+      margin-bottom: 15px;
+    }
+
+    .user-message {
+      justify-content: flex-end;
+    }
+
+    .chat-message-text {
+      padding: 10px;
+      border-radius: 5px;
+      max-width: 70%;
+    }
+
+    .user-message .chat-message-text {
+      background-color: #1a8cff;
+      color: #fff;
+    }
+
+    .bot-message .chat-message-text {
+      background-color: #e6e6e6;
+      color: #000;
+    }
+
+    .input-container {
+      display: flex;
+      margin-top: 30px;
+    }
+
+    input[type="text"] {
+      flex-grow: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 18px;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="submit"] {
+      background-color: #1a8cff;
+      color: #fff;
+      font-size: 18px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      margin-left: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #0d6dba;
+    }
+
+    .bg-img {
+      /*background-image: url(YOUR_BACKGROUND_IMAGE_URL_HERE);*/
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+    }
+  </style>
+
+  <script type="text/javascript" src="/easyui/jquery.min.js"></script>
+</head>
+
+<body>
+<h1>ChatGPT API Demo</h1>
+<label for="input">输入：</label>
+<input type="text" id="input">
+<button onclick="chat()">发送</button>
+<br>
+<label for="output">输出：</label>
+<textarea id="output" rows="10" cols="50" readonly></textarea>
+
+<script>
+  // 替换成您的OpenAI API密钥
+  const API_KEY = "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";
+
+  // ChatGPT API端点
+  const API_ENDPOINT = "https://www.gptjx.cc";
+
+  // ChatGPT模型引擎ID
+  const ENGINE_ID = "text-davinci-003";
+
+  // 处理ChatGPT API响应
+  function handleResponse(response) {
+    let output = response.choices[0].text;
+    $('#output').val($('#output').val() + output);
+  }
+
+  // 发送ChatGPT API请求
+  function sendRequest(prompt) {
+    let request_data = {
+      "prompt": prompt,
+      "temperature": 0.7,
+      "max_tokens": 60,
+      "stop": ["\n", "User:"]
+    };
+
+    let request_headers = {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${API_KEY}`
+    };
+
+    $.ajax({
+      url: API_ENDPOINT,
+      type: "POST",
+      dataType: "json",
+      headers: request_headers,
+      data: JSON.stringify(request_data),
+      success: handleResponse,
+      error: function (xhr, status, error) {
+        alert("API请求失败：" + error);
+      }
+    });
+  }
+
+  // 处理用户输入
+  function chat() {
+    let prompt = "User: " + $('#input').val() + "\nAI:";
+    $('#input').val('');
+    $('#output').val($('#output').val() + prompt);
+    sendRequest(prompt);
+  }
+</script>
+</body>
+</html>

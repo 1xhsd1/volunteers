@@ -7,7 +7,7 @@
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
     <meta charset="UTF-8" />
-    <title>WE志愿服务中心</title>
+    <title>时尚酒店服务中心</title>
     <!--[if IE]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -47,8 +47,9 @@
     </section>
     <header id="pageheader">
         <h1>
-            WE<span>志愿</span>
+            时尚<span>酒店</span>
         </h1>
+        <a th:href="@{/goin}"><button style="margin-top: 53px; margin-left: 450px" type="button" class="btn btn-success btn-xs">办理入住</button></a>
     </header>
     <div id="contents">
         <section id="main">
@@ -59,9 +60,12 @@
                 <thead>
                 <tr>
                     <!--					<th scope="col">报名日期</th>-->
-                    <th scope="col">申请日期</th>
-                    <th scope="col">申请人</th>
-                    <th scope="col">申请活动</th>
+                    <th scope="col">预约时间</th>
+                    <th scope="col">入住时间</th>
+                    <th scope="col">退房时间</th>
+                    <th scope="col">姓名</th>
+                    <th scope="col">房间</th>
+                    <th scope="col">状态</th>
                     <th scope="col">操作</th>
 
                 </tr>
@@ -69,10 +73,14 @@
                 <tbody>
                 <tr th:each="enroll:${enrollList}">
                     <td th:text="${#dates.format(enroll.enrollDate,'yyyy年MM月dd日HH:mm:ss')}"></td>
-                    <td th:text="${session.user?.username}"></td>
+                    <td th:text="${#dates.format(enroll.inDate,'yyyy年MM月dd日HH:mm:ss')}"></td>
+                    <td th:text="${#dates.format(enroll.outDate,'yyyy年MM月dd日HH:mm:ss')}"></td>
+                    <td th:text="${enroll.realName}"></td>
                     <td><a th:href="@{/event/view/}+${enroll.temId}"  th:text="${enroll.title}"></a></td>
-                    <td><a th:href="@{/admin/enroll/success/}+${enroll.id}"><button type="button" class="btn btn-success btn-xs">通过</button></A>&nbsp;<a th:href="@{/admin/enroll/refuse/}+${enroll.id}">
-                        <button type="button" class="btn btn-danger btn-xs">驳回</button></a></td>
+                    <td th:if="${enroll.state==0}" th:text="已预约" style="color: green"></td>
+                    <td th:if="${enroll.state==1}" th:text="已入住" style="color: orange"></td>
+                    <td th:if="${enroll.state==2}" th:text="已退房" style="color: red"></td>
+                    <td><a th:href="@{/admin/enroll/success/}+${enroll.id}"><button th:if="${enroll.state==0}" type="button" class="btn btn-success btn-xs">入住</button></a><a th:href="@{/admin/enroll/refuse/}+${enroll.id}"><button th:if="${enroll.state==1}" type="button" class="btn btn-danger btn-xs">退房</button></a><button th:if="${enroll.state==2}" type="button" class="btn btn-danger btn-xs" disabled=true >已退房</button></td>
                 </tr>
                 <!--				<tr>-->
                 <!--					<th scope="row">2</th>-->
@@ -94,8 +102,8 @@
                 <div class="clear"></div>
             </div>
         </section>
-        <section id="sidebar">
-            <div id="sidebarwrap" th:insert="admin/common :: #leftNav">
+        <section id="sidebar" style="float: right">
+            <div id="sidebarwrap" th:insert="admin/common :: #leftNav" >
 
 
 

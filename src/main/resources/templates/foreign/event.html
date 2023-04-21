@@ -3,7 +3,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>WE志愿服务中心</title>
+    <title>时尚酒店服务中心</title>
     <link th:href="@{/css/swiper-bundle.min.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
 
@@ -46,7 +46,7 @@
     <header id="pageheader">
 
         <h1>
-            WE<span>&nbsp;志愿</span>
+            时尚<span>&nbsp;酒店</span>
         </h1>
 
 
@@ -72,7 +72,7 @@
         <section id="main">
             <div id="leftcontainer">
                 <h2 class="mainheading">
-                    热点志愿活动
+                    爆款房间
 
                 </h2>
                 <div>
@@ -81,14 +81,14 @@
                             <article class="post">
                                 <header>
                                     <h3><a th:href="@{/event/view/}+${event.eventId}" th:text="${event.title}">${event.title}</a></h3>
-                                    <p class="postinfo">发布于 <a th:text="${#dates.format(event.releaseDate,'yyyy年MM月dd日')}" th:href="@{/event/view/}+${event.eventId}"></a></p>
+                                    <p class="postinfo">最早可于 <a th:text="${#dates.format(event.releaseDate,'yyyy年MM月dd日')}" th:href="@{/event/view/}+${event.eventId}"></a> 开始预定</p>
                                 </header>
                                 <p th:text="${event.summary}">
                                     <a th:href="@{/about}">Read More</a></p>
 
                                 <footer>
                                     <!--<span class="author">Authorname</span>-->
-                                    <span class="permalink"><a href="#" th:text="阅读+${event.cilckHit}"></a></span>
+                                    <span class="permalink"><a href="#" th:text="浏览+${event.cilckHit}"></a></span>
                                     <span class="comments"><a href="#" th:text="评论+${event.replyHit}"></a></span>
                                 </footer>
                             </article>

@@ -13,7 +13,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface EventtypeService extends IService<Eventtype> {
     /**
-     * 查询每个活动分类及分类数目
+     * 查询每个房间分类及分类数目
      * @return
      * @throws Exception
      */

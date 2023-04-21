@@ -24,7 +24,7 @@ public interface FavouriteService extends IService<Favourite> {
     List<Favourite> queryByName(String username, int eventId) throws Exception;
 
     /**
-     * 删除对应志愿活动的全部收藏
+     * 删除对应房间的全部收藏
      * @param eventId
      * @return
      * @throws Exception

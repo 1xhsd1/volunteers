@@ -26,7 +26,7 @@ public class LovelistServiceImpl extends ServiceImpl<LovelistMapper, Lovelist> i
     @Override
     public List<Lovelist> findLoveList() throws Exception {
         QueryWrapper<Lovelist> wrapper = new QueryWrapper<>();
-        wrapper.orderByDesc("releasseDate");
+        wrapper.orderByDesc("score");
         return lovelistMapper.selectList(wrapper);
     }
 

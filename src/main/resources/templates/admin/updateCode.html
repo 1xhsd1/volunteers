@@ -99,11 +99,11 @@
 <!-- contact-form -->
 <div class="message warning">
     <div class="inset">
-        <div class="login-head">
+        <div class="login-head" style="opacity: 0.8">
             <h1>修改密码</h1>
             <div class="alert-close"> </div>
         </div>
-        <form method="post" th:action="@{/user/updateCode}" onSubmit="return beforeSubmit(this);" th:method="post">
+        <form method="post" th:action="@{/user/updateCode}" onSubmit="return beforeSubmit(this);" th:method="post" style="opacity: 0.7">
             <!--            <label style="float: left;font-size: 10px" >4-16位字母、数字、减号和下划线组成</label>-->
             <li>
                 <input type="text" name="username" placeholder="原密码"><a href="#" class=" icon user"></a>

@@ -48,7 +48,7 @@ public class EventController {
 
 
     /**
-     * 查询活动详细信息
+     * 查询房间详细信息
      * @param id
      * @param model
      * @return
@@ -70,7 +70,7 @@ public class EventController {
     }
 
     /**
-     * 查询志愿活动
+     * 查询房间
      * @param keyWord
      * @param page
      * @param model
@@ -81,7 +81,7 @@ public class EventController {
         try {
             //每页显示的数量
             int pageSize =3;
-            //调用查询活动的方法
+            //调用查询房间的方法
             List<Event> eventList = eventIndex.searchIndex(keyWord);
             //计算集合中的分页
             int toIndex = Math.min(eventList.size(), page * pageSize);

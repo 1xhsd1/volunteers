@@ -1,5 +1,5 @@
 $(function () {
-    //加载志愿活动类别
+    //加载房间类别
     $.get("/eventtype/typelist",function (data) {
         var eventTypeList = $("#eventTypeList");
         //循环遍历json数组

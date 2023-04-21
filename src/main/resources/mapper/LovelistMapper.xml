@@ -10,12 +10,13 @@
         <result column="title" property="title" />
         <result column="releasseDate" property="releasseDate" />
         <result column="img" property="img" />
+        <result column="score" property="score" />
 
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, summary, content, title, releasseDate, img
+        id, summary, content, title, releasseDate, img, score
     </sql>
 
 </mapper>

@@ -31,7 +31,7 @@ private static final long serialVersionUID=1L;
     private Date commentDate;
 
     /**
-     * 活动id
+     * 房间id
      */
     @TableField("eventId")
     private Integer eventId;

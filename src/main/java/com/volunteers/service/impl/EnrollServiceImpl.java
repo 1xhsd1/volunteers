@@ -47,4 +47,9 @@ public class EnrollServiceImpl extends ServiceImpl<EnrollMapper, Enroll> impleme
     public int updateEnrollById(Enroll enroll) throws Exception {
         return enrollMapper.updateById(enroll);
     }
+
+    @Override
+    public int addEnroll(Enroll enroll) throws Exception {
+        return enrollMapper.insert(enroll);
+    }
 }

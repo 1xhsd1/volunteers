@@ -11,12 +11,13 @@
     <nav id="sitenav">
         <ul>
             <li><a th:href="@{/index}">主页</a></li>
-            <li><a th:href="@{/toEvent}">志愿活动</a></li>
-            <li><a th:href="@{/lovelist/toLoveList}">爱心榜</a></li>
-            <li><a th:href="@{/notice/toNoticeList}">社区公告</a></li>
+            <li><a th:href="@{/toEvent}">爆款房间</a></li>
+            <li><a th:href="@{/lovelist/toLoveList}">员工榜</a></li>
+            <li><a th:href="@{/notice/toNoticeList}">酒店公告</a></li>
             <li><a th:href="@{/user/admin/myInfo}">个人中心</a></li>
+            <li><a th:href="@{/user/chat}">联系客服</a></li>
             <li th:if="${session.user?.username}==null"><a th:href="@{/toLogin}">登录</a></li>
-            <li th:if="${session.user?.username}!=null" th:text="欢迎+${session.user?.username}+登录志愿服务中心" style="color: white;line-height: 30px;"></li>
+            <li th:if="${session.user?.username}!=null" th:text="欢迎+${session.user?.username}+登录时尚酒店服务中心" style="color: white;line-height: 30px;"></li>
 
 
 
@@ -26,10 +27,10 @@
 </div>
 
 <div id="commonRight">
-    <h2>About WE志愿</h2>
-    <p>WE志愿是基于springboot的社区志愿者服务系统，仅用于学习用途。此系统会发布社区最新的志愿者服务活动及社区新闻等，志愿者可在该系统进行报名。该系统涵盖的功能有活动查询，活动报名，活动分类，查看公告等，使用过程中有任何问题请联系管理员邮箱1687184886@qq.com</p>
+    <h2>About 时尚酒店</h2>
+    <p>欢迎来到时尚酒店！我们致力于为每一位客人提供舒适、时尚、优质的住宿体验。酒店位于市中心繁华地段，交通便利，距离商业区、文化区、娱乐区等多个热门景点仅数分钟步行路程。酒店客房宽敞明亮，配备了豪华的床上用品和高品质的洗浴用品，为您打造一个舒适的私人空间。我们的前台团队将为您提供贴心周到的服务，以确保您在时尚酒店拥有一次愉快、难忘的住宿体验。无论是商务出行还是休闲旅行，时尚酒店都是您的理想选择。</p>
 
-    <h2>活动类别</h2>
+    <h2>房间类别</h2>
     <ul id="eventTypeList">
 
         <!--	<li><a href="#">Web Design</a>(4)</li>-->
@@ -43,9 +44,9 @@
 
 
     </ul>
-    <h2>最新活动</h2>
+<!--    <h2>最新房间</h2>-->
 
-    <ul id="dateList">
+<!--    <ul id="dateList">-->
 
         <!--	<li><a href="#">Web Design</a></li>-->
         <!--	<li><a href="#">Graphics Design</a></li>-->
@@ -57,7 +58,7 @@
         <!--	<li><a href="#">Music and Entertainment</a></li>-->
 
 
-    </ul>
+<!--    </ul>-->
 
 
 
@@ -65,7 +66,7 @@
 
 <div id="copyRightFoot">
     <div class="copyright">
-         &copy; 2022 Welcome To WE志愿
+         &copy; 2023 Welcome To FASHION HOTEL
     </div>
 <!--    <div class="credit">-->
 <!--        <a href="http://www.moobnn.com/" title="网站模板" target="_blank">网站模板</a> by CSSHeaven.org </div>-->

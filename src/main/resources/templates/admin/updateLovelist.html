@@ -3,7 +3,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>WE志愿服务中心</title>
+    <title>时尚酒店服务中心</title>
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
     <!--[if IE]>
 
@@ -52,11 +52,11 @@
             var content = UE.getEditor('editor').getContent();
             //非空验证
             if (title.length == 0) {
-                $.messager.alert("系统提示", "爱心榜标题不能为空！", "info");
+                $.messager.alert("系统提示", "员工姓名不能为空！", "info");
             }  else if (content.length == 0) {
-                $.messager.alert("系统提示", "爱心榜内容不能为空！", "info");
+                $.messager.alert("系统提示", "详细介绍不能为空！", "info");
             }else if (summary.length == 0) {
-                $.messager.alert("系统提示", "爱心榜简介不能为空！", "info");
+                $.messager.alert("系统提示", "员工座右铭不能为空！", "info");
             }
                 // else if (img == null) {
                 // 	$.messager.alert("系统提示", "爱心榜图片不能为空！", "info");
@@ -70,7 +70,7 @@
                     "title": title,
                     "content": content,
                     "summary": summary,
-                    "img":img,
+                    "score":img,
                     "contentNoTag":contentNoTag,
 
                 };
@@ -79,7 +79,7 @@
                     if (data.success) {
                         $.messager.show({
                             title: '系统提示',
-                            msg: '爱心榜修改成功',
+                            msg: '员工信息修改成功',
                             timeout: 3000,
                             showType: 'slide'
                         });
@@ -88,7 +88,7 @@
                     }else{
                         $.messager.show({
                             title: '系统提示',
-                            msg: '爱心榜修改失败',
+                            msg: '员工信息修改失败',
                             timeout: 3000,
                             showType: 'slide'
                         });
@@ -129,24 +129,24 @@
         <section id="main">
             <!-- 隐藏域，保存博客id，因为修改是要根据主键修改 -->
             <input type="hidden" name="id" id="id" th:value="${id}">
-            <div id="p" title="修改爱心榜" style="height: auto;padding-left: 10px;margin-left: 10px">
+            <div id="p" title="修改员工信息" style="height: auto;padding-left: 10px;margin-left: 10px">
                 <table cellspacing="20px">
                     <tr>
-                        <td width="80px">爱心榜标题：</td>
+                        <td width="80px">员工姓名：</td>
                         <td>
                             <input  class="easyui-textbox" type="text" id="title" name="title" style="width: 400px" required/>
                         </td>
                     </tr>
 
                     <tr>
-                        <td width="80px">事迹简介：</td>
+                        <td width="80px">员工座右铭：</td>
                         <td>
                             <input  class="easyui-textbox" type="text" id="summary" name="summary" style="width: 400px" required/>
                         </td>
                     </tr>
 
                     <tr>
-                        <td width="80px">图片：</td>
+                        <td width="80px">综合评分：</td>
                         <td>
                             <!--							<input th:action="/upload" th:method="post" class="easyui-textbox" type="submit" value="上传" id="img" name="img" style="width: 400px" required/>-->
 <!--                            <form enctype="multipart/form-data" method="post" action="/upload">-->
@@ -160,7 +160,7 @@
                     </tr>
 
                     <tr>
-                        <td valign="top">事迹内容：</td>
+                        <td valign="top">详细介绍：</td>
                         <td>
                             <textarea id="editor" name="content" type="text/plain" style="width: 100%;height: 300px;"></textarea>
                         </td>
@@ -193,7 +193,7 @@
                             $("#title").textbox("setValue",result.title);
                             $("#summary").textbox("setValue",result.summary);
                             //$("#blogTypeId").combobox("setValue",result.eventtype.id);
-                            //$("#img").val("setValue",result.img);
+                            $("#img").textbox("setValue",result.score);
                             UE.getEditor('editor').setContent(result.content);
                             //$("#needScale").textbox("setValue",result.needScale);
 

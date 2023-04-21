@@ -51,6 +51,20 @@ private static final long serialVersionUID=1L;
     @TableField("img")
     private String img;
 
+    /**
+     * 月度评分
+     */
+    @TableField("score")
+    private Integer score;
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
+    }
+
     public String getImg() {
         return img;
     }
@@ -102,11 +116,13 @@ private static final long serialVersionUID=1L;
     @Override
     public String toString() {
         return "Lovelist{" +
-        "id=" + id +
-        ", summary=" + summary +
-        ", content=" + content +
-        ", title=" + title +
-        ", releasseDate=" + releasseDate +
-        "}";
+                "id=" + id +
+                ", summary='" + summary + '\'' +
+                ", content='" + content + '\'' +
+                ", title='" + title + '\'' +
+                ", releasseDate=" + releasseDate +
+                ", img='" + img + '\'' +
+                ", score=" + score +
+                '}';
     }
 }

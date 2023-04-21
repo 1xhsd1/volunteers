@@ -1,9 +1,9 @@
 <!doctype html>
 
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
 <meta charset="UTF-8" />
-<title>WE志愿服务中心</title>
+<title>时尚酒店</title>
     <link th:href="@{/css/swiper-bundle.min.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
 
@@ -46,7 +46,7 @@
 <header id="pageheader">
 
 <h1>
-    WE<span>&nbsp;志愿</span>
+    时尚<span>&nbsp;酒店</span>
 </h1>
 
 
@@ -111,26 +111,30 @@
 </section>
 <div id="leftcontainer">
 <h2 class="mainheading">
-热点志愿活动
+爆款房间推荐
 
 </h2>
   <div>
     <ul>
       <li th:each="event:${eventList}">
-<article class="post">
-<header>
-<h3><a th:href="@{/event/view/}+${event.eventId}" th:text="${event.title}">${event.title}</a></h3>
-<p class="postinfo">发布于 <a th:text="${#dates.format(event.releaseDate,'yyyy年MM月dd日')}" th:href="@{/event/view/}+${event.eventId}"></a></p>
-</header>
-<p th:text="${event.summary}">
- <a th:href="@{/about}">Read More</a></p>
+          <div style="display: inline-block; ">
+              <img style="width: 600px;height: 200px; border-radius: 10px;" th:src="@{'images/'+${event.site}}">
+          </div>
+          <div style="display: inline-block;padding-left: 20px;">
+            <article class="post">
+                <header>
+                <h3><a th:href="@{/event/view/}+${event.eventId}" th:text="${event.title}">${event.title}</a></h3>
+                <p class="postinfo">最早可于<a th:text="${#dates.format(event.releaseDate,'yyyy年MM月dd日')}" th:href="@{/event/view/}+${event.eventId}"></a>后预定</p>
+                </header>
+                <p th:text="${event.summary}">
+                <a th:href="@{/about}">Read More</a></p>
 
-<footer>
-<!--<span class="author">Authorname</span>-->
-<span class="permalink"><a href="#" th:text="阅读+${event.cilckHit}"></a></span>
-<span class="comments"><a href="#" th:text="评论+${event.replyHit}"></a></span>
-</footer>
-</article>
+                <footer>
+                <span class="permalink"><a href="#" th:text="浏览+${event.cilckHit}"></a></span>
+                <span class="comments"><a href="#" th:text="评论+${event.replyHit}"></a></span>
+                </footer>
+            </article>
+          </div>
       </li>
     </ul>
   </div>

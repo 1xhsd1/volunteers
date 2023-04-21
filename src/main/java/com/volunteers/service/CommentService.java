@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface CommentService extends IService<Comment> {
     /**
-     * 根据活动id查找评论
+     * 根据房间id查找评论
      * @param id
      * @return
      * @throws Exception
@@ -23,7 +23,7 @@ public interface CommentService extends IService<Comment> {
     List<Comment> findCommentByEventId(Integer id) throws Exception;
 
     /**
-     * 根据活动id删除评论
+     * 根据房间id删除评论
      * @param eventId
      * @return
      * where b.video_id = d.id and b.create_time between "2023-02-15 00:00:00" and "2023-02-17 00:00:00"

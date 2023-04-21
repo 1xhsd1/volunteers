@@ -73,4 +73,23 @@ public class UploadController {
         return "/admin/WriteNotice";
     }
 
+    @PostMapping("/uploadRoom")
+    public String UploadRoom(@RequestParam("file") MultipartFile file,Model model) throws IOException {
+        if(file.isEmpty()){
+            // 这里是我自定义的异常，可省略
+//            throw new NotFindException();
+        }
+        // 上传文件/图像到指定文件夹（这里可以改成你想存放地址的相对路径）
+        File savePos = new File("src/main/resources/static/images");
+        if(!savePos.exists()){  // 不存在，则创建该文件夹
+            savePos.mkdir();
+        }
+        // 获取存放位置的规范路径
+        String realPath = savePos.getCanonicalPath();
+        // 上传该文件/图像至该文件夹下
+        file.transferTo(new File(realPath+"/"+file.getOriginalFilename()));
+        model.addAttribute("fileName",file.getOriginalFilename());
+        return "/admin/writeEvent";
+    }
+
 }

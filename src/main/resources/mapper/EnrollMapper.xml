@@ -7,6 +7,8 @@
         <id column="id" property="id" />
         <result column="eventId" property="eventId" />
         <result column="enrollDate" property="enrollDate" />
+        <result column="inDate" property="inDate" />
+        <result column="outDate" property="outDate" />
         <result column="username" property="username" />
         <result column="realName" property="realName" />
         <result column="email" property="email" />
@@ -17,7 +19,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, eventId, enrollDate, username, realName, email, identifyNO, phone, state
+        id, eventId, enrollDate, inDate, outDate, username, realName, email, identifyNO, phone, state
     </sql>
 
     <select id="findEnrollByName" resultType="com.volunteers.entity.Enroll">
@@ -28,9 +30,9 @@
     </select>
 
     <select id="queryList" resultType="com.volunteers.entity.Enroll">
-        SELECT t_enroll.*,t_event.eventId temId,   t_event.title
-        FROM t_event, t_enroll
-        WHERE t_event.eventId=t_enroll.eventId AND t_enroll.`state` = 0
+        SELECT t_enroll.*,t_eventtype.`typeId` temId,   t_eventtype.typeName title
+        FROM t_enroll LEFT JOIN t_eventtype
+                                ON t_enroll.eventId=t_eventtype.`typeId`
         ORDER BY t_enroll.`enrollDate` DESC
     </select>
 

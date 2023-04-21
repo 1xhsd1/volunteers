@@ -18,12 +18,12 @@ public interface SysConstant {
      */
     String LOGINUSER = "loginUser";
     /**
-     * 活动类别名称和数量的缓存数据
+     * 房间类别名称和数量的缓存数据
      */
     String EVENT_NAME_COUNT = "event_name_count";
 
     /**
-     * 活动发布日期和数量的缓存数量
+     * 房间发布日期和数量的缓存数量
      */
     String EVENT_DATE_COUNT = "event_date_count";
 

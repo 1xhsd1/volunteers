@@ -3,7 +3,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8" />
-	<title>WE志愿服务中心</title>
+	<title>时尚酒店服务中心</title>
 	<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
 	<!--[if IE]>
 
@@ -41,12 +41,12 @@
 
 
 		function submitData() {
-			//获取社区公告标题
+			//获取公告标题
 			var title = $("#title").textbox("getValue");
-			//获取社区公告简介
+			//获取公告简介
 			var summary = $("#summary").textbox("getValue");
 
-			//获取社区公告图片
+			//获取公告图片
 			var img = $("#img").val();
 			//获取社区公告内容
 			var content = UE.getEditor('editor').getContent();
@@ -54,11 +54,11 @@
 
 			//非空验证
 			if (title.length == 0) {
-				$.messager.alert("系统提示", "社区公告标题不能为空！", "info");
+				$.messager.alert("系统提示", "公告标题不能为空！", "info");
 			}  else if (content.length == 0) {
-				$.messager.alert("系统提示", "社区公告内容不能为空！", "info");
+				$.messager.alert("系统提示", "公告内容不能为空！", "info");
 			}else if (summary.length == 0) {
-				$.messager.alert("系统提示", "社区公告简介不能为空！", "info");
+				$.messager.alert("系统提示", "公告简介不能为空！", "info");
 			}
 			// else if (img.length == 0) {
 			// 	$.messager.alert("系统提示", "社区公告图片不能为空！", "info");
@@ -80,7 +80,7 @@
 					if (data.success) {
 						$.messager.show({
 							title: '系统提示',
-							msg: '活动发布成功',
+							msg: '公告发布成功',
 							timeout: 3000,
 							showType: 'slide'
 						});
@@ -89,7 +89,7 @@
 					}else{
 						$.messager.show({
 							title: '系统提示',
-							msg: '活动发布失败',
+							msg: '公告发布失败',
 							timeout: 3000,
 							showType: 'slide'
 						});
@@ -121,7 +121,7 @@
 	</section>
 	<header id="pageheader">
 		<h1>
-			WE<span>志愿</span>
+			时尚<span>酒店</span>
 		</h1>
 	</header>
 
@@ -135,7 +135,7 @@
 
 	<div id="contents">
 		<section id="main">
-			<div id="p" title="发布社区公告" style="height: auto;padding-left: 10px;margin-left: 10px">
+			<div id="p" title="发布酒店公告" style="height: auto;padding-left: 10px;margin-left: 10px">
 				<table cellspacing="20px">
 					<input type="hidden" th:value="${fileName}" name="img" id="img">
 

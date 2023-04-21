@@ -17,7 +17,7 @@ import java.util.List;
  */
 public interface EventMapper extends BaseMapper<Event> {
     /**
-     * 按日期分类志愿活动
+     * 按日期分类房间
      * @return
      * @throws Exception
      */
@@ -31,7 +31,7 @@ public interface EventMapper extends BaseMapper<Event> {
     IPage<Event> findEventByPage(@Param("page")IPage<Event> page, @Param("event")Event event);
 
     /**
-     * 根据id查找活动
+     * 根据id查找房间
      * @param id
      * @return
      * @throws Exception
@@ -39,7 +39,7 @@ public interface EventMapper extends BaseMapper<Event> {
     Event findEventById(Integer id) throws Exception;
 
     /**
-     * 查询所有志愿活动
+     * 查询所有房间
      * @return
      * @throws Exception
      */

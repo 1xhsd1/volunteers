@@ -25,7 +25,7 @@ private static final long serialVersionUID=1L;
     private Integer id;
 
     /**
-     * 活动id
+     * 房间id
      */
     @TableField("eventId")
     private Integer eventId;
@@ -79,6 +79,28 @@ private static final long serialVersionUID=1L;
 
     @TableField(exist = false)
     private Integer temId;
+
+    @TableField("inDate")
+    private Date inDate;
+
+    @TableField("outDate")
+    private Date outDate;
+
+    public Date getInDate() {
+        return inDate;
+    }
+
+    public void setInDate(Date inDate) {
+        this.inDate = inDate;
+    }
+
+    public Date getOutDate() {
+        return outDate;
+    }
+
+    public void setOutDate(Date outDate) {
+        this.outDate = outDate;
+    }
 
     public Integer getTemId() {
         return temId;
@@ -171,14 +193,19 @@ private static final long serialVersionUID=1L;
     @Override
     public String toString() {
         return "Enroll{" +
-        "id=" + id +
-        ", eventId=" + eventId +
-        ", enrollDate=" + enrollDate +
-        ", username=" + username +
-        ", realName=" + realName +
-        ", email=" + email +
-        ", identifyNO=" + identifyNO +
-        ", phone=" + phone +
-        "}";
+                "id=" + id +
+                ", eventId=" + eventId +
+                ", enrollDate=" + enrollDate +
+                ", username='" + username + '\'' +
+                ", realName='" + realName + '\'' +
+                ", email='" + email + '\'' +
+                ", identifyNO='" + identifyNO + '\'' +
+                ", phone='" + phone + '\'' +
+                ", state=" + state +
+                ", title='" + title + '\'' +
+                ", temId=" + temId +
+                ", inDate=" + inDate +
+                ", outDate=" + outDate +
+                '}';
     }
 }

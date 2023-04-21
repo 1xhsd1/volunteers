@@ -33,7 +33,7 @@ public class EventAdminController {
     private CommentService commentService;
 
     /**
-     * 进入志愿活动管理
+     * 进入房间管理
      * @param model
      * @return
      */
@@ -50,7 +50,7 @@ public class EventAdminController {
     }
 
     /**
-     * 发布活动
+     * 发布房间
      * @param event
      * @return
      */
@@ -64,14 +64,14 @@ public class EventAdminController {
             //传过来的时间格式为 “2022-02-09T10:21” 中间有一个T，所以我们要把T去掉
             SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm");
             Date releaseDate = dateFormat.parse(releaseDateStr.replace("T"," "));
-            Date runDate = dateFormat.parse(runDateStr.replace("T"," "));
+//            Date runDate = dateFormat.parse(runDateStr.replace("T"," "));
 
             event.setReleaseDate(releaseDate);
-            event.setRunDate(runDate);
+//            event.setRunDate(runDate);
 
-            //调用新增活动的方法
+            //调用新增房间的方法
             int count = eventService.addEvent(event);
-            //发布成功后，将活动的相关信息放到lucene索引库中、
+            //发布成功后，将房间的相关信息放到lucene索引库中、
             eventIndex.addIndex(event);
             if(count>0){
                 map.put("success",true);//发布成功
@@ -87,7 +87,7 @@ public class EventAdminController {
 
 
     /**
-     * 删除志愿活动
+     * 删除房间
      * @param id
      * @return
      * @throws Exception
@@ -101,14 +101,14 @@ public class EventAdminController {
         //删除lucene索引
         String stringId = String.valueOf(id);
         eventIndex.deleteIndex(stringId);
-        //删除活动
+        //删除房间
         eventService.deleteEventById(id);
         return "redirect:/admin/index";
 
     }
 
     /**
-     *修改活动
+     *修改房间
      * @param id
      * @param model
      * @return
@@ -140,7 +140,7 @@ public class EventAdminController {
     }
 
     /**
-     * 接收数据并修改活动
+     * 接收数据并修改房间
      * @param event
      * @return
      */
@@ -154,10 +154,10 @@ public class EventAdminController {
             //传过来的时间格式为 “2022-02-09T10:21” 中间有一个T，所以我们要把T去掉
             SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm");
             Date releaseDate = dateFormat.parse(releaseDateStr.replace("T"," "));
-            Date runDate = dateFormat.parse(runDateStr.replace("T"," "));
+//            Date runDate = dateFormat.parse(runDateStr.replace("T"," "));
 
             event.setReleaseDate(releaseDate);
-            event.setRunDate(runDate);
+//            event.setRunDate(runDate);
 
             //调用修改博客信息的方法
             int count = eventService.updateEvent(event);

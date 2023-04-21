@@ -3,7 +3,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>WE志愿服务中心</title>
+    <title>时尚酒店服务中心</title>
     <link th:href="@{/css/swiper-bundle.min.css}" rel="stylesheet" type="text/css">
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
 
@@ -46,46 +46,33 @@
     <header id="pageheader">
 
         <h1>
-            WE<span>&nbsp;志愿</span>
+            时尚<span>&nbsp;酒店</span>
         </h1>
-
-
-        <div id="search">
-
-            <form th:action="@{/event/query}" method="post">
-
-                <div class="searchfield">
-
-
-                    <input type="text" name="keyWord" id="keyWord">
-
-                </div>
-                <div class="searchbtn">
-                    <input type="image" src="/images/searchbtn.png" alt="search">
-                </div>
-
-            </form>
-
-        </div>
     </header>
     <div id="contents">
         <section id="main">
             <div id="leftcontainer">
                 <h2 class="mainheading">
-                    爱心榜
+                    月度优秀员工榜
 
                 </h2>
                 <div>
                     <ul>
-                        <li th:each="item:${loveList}" style="border-bottom:solid 1px #ddd;margin-top: 20px;">
+                        <li th:each="item, i:${loveList}" style="border-bottom:solid 1px #ddd;margin-top: 20px;">
                             <div style="display: inline-block; ">
-                                <img style="width: 150px;height: 100px;" th:src="@{'images/'+${item.img}}">
+                                <img style="width: 150px;height: 100px;border-radius: 10px;" th:src="@{'images/'+${item.img}}">
                             </div>
                             <div style="display: inline-block;padding-left: 20px;">
                             <article class="post">
                                 <header>
+                                    <h3>综合评分：<span th:if="${item.score>=60}" style="color: #5eb334;font-size: 23px" th:text="${item.score}"></span>
+                                        <span th:if="${item.score<60}" style="color: #cc3737;font-size: 23px" th:text="${item.score}"></span>
+                                        <img th:if="${i.index==0}" style="width: 22px;height: 30px" th:src="@{'images/first.png'}">
+                                        <img th:if="${i.index==1}" style="width: 22px;height: 30px" th:src="@{'images/second.png'}">
+                                        <img th:if="${i.index==2}" style="width: 22px;height: 30px" th:src="@{'images/third.png'}">
+                                    </h3>
                                     <h3><a th:href="@{/lovelist/}+${item.id}" th:text="${item.title}"></a></h3>
-                                    <p class="postinfo">发布于 <sapn th:text="${#dates.format(item.releasseDate,'yyyy年MM月dd日')}"></sapn></p>
+                                    <p class="postinfo">入职时间： <sapn th:text="${#dates.format(item.releasseDate,'yyyy年MM月dd日')}"></sapn></p>
                                 </header>
                                 <p th:text="${item.summary}">
 <!--                                    <a th:href="@{/about}">Read More</a></p>-->

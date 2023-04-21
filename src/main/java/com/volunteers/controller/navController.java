@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -17,6 +18,16 @@ import java.util.List;
 public class navController {
     @Resource
     private EventService eventService;
+
+    @RequestMapping("/user/chat")
+    public String goToChat(){
+        return "foreign/chat";
+    }
+
+    @RequestMapping("/goin")
+    public String goin(){
+        return "admin/goin";
+    }
 
     @RequestMapping("/about")
     public String goToAbout(){
@@ -56,7 +67,7 @@ public class navController {
     }
 
     /**
-     * 导航到发布活动页面
+     * 导航到发布房间页面
      * @return
      */
     @RequestMapping("/admin/toWriteEvent")
@@ -84,6 +95,10 @@ public class navController {
     }
 
 
+    @RequestMapping("gpt")
+    public String toGpt(){
+        return "foreign/gpt";
+    }
 
     /**
      * 首页查询最新博客列表
@@ -113,7 +128,7 @@ public class navController {
 
         //分页查询
         IPage<Event> eventIPage = eventService.findEventByPage(page,event);
-        //获取活动数据列表
+        //获取房间数据列表
         List<Event> eventList = eventIPage.getRecords();
         //将对象放到模型中
         model.addAttribute("eventList",eventList);

@@ -47,31 +47,31 @@
             var summary = $("#summary").textbox("getValue");
 
             //获取社区公告图片
-            var img = $("#img").val();
+            // var img = $("#img").val();
             //获取社区公告内容
             var content = UE.getEditor('editor').getContent();
 
             //非空验证
             if (title.length == 0) {
-                $.messager.alert("系统提示", "社区公告标题不能为空！", "info");
+                $.messager.alert("系统提示", "酒店公告标题不能为空！", "info");
             }  else if (content.length == 0) {
-                $.messager.alert("系统提示", "社区公告内容不能为空！", "info");
+                $.messager.alert("系统提示", "酒店公告内容不能为空！", "info");
             }else if (summary.length == 0) {
-                $.messager.alert("系统提示", "社区公告简介不能为空！", "info");
+                $.messager.alert("系统提示", "酒店公告简介不能为空！", "info");
             }
                 // else if (img.length == 0) {
                 // 	$.messager.alert("系统提示", "社区公告图片不能为空！", "info");
             // }
             else {
                 var contentNoTag = UE.getEditor('editor').getContentTxt();//获取纯文本
-                var summary = UE.getEditor('editor').getContentTxt().substr(0,155);//获取纯文本
+                var summary = UE.getEditor('editor').getContentTxt().substr(0,35);//获取纯文本
                 //提交到服务器的参数列表
                 var param = {
                     "id":id,
                     "title": title,
                     "content": content,
                     "summary": summary,
-                    "img":img,
+                    // "img":img,
                     "contentNoTag":contentNoTag,
 
                 };
@@ -108,7 +108,7 @@
         function resultValue(){
             $("#title").textbox("setValue","");
             UE.getEditor('editor').setContent('');
-            $("#img").textbox("setValue","");
+            // $("#img").textbox("setValue","");
 
             $("#summary").textbox("setValue","");
         }
@@ -147,14 +147,14 @@
                         </td>
                     </tr>
 
-                    <tr>
-                        <td width="80px">图片：</td>
-                        <td>
-                            <form enctype="multipart/form-data" method="post" action="/upload">
-                                <input type="file"  id="img" name="img" style="width: 400px"/>
-                            </form>
-                        </td>
-                    </tr>
+<!--                    <tr>-->
+<!--                        <td width="80px">图片：</td>-->
+<!--                        <td>-->
+<!--                            <form enctype="multipart/form-data" method="post" action="/upload">-->
+<!--                                <input type="file"  id="img" name="img" style="width: 400px"/>-->
+<!--                            </form>-->
+<!--                        </td>-->
+<!--                    </tr>-->
 
                     <tr>
                         <td valign="top">公告内容：</td>

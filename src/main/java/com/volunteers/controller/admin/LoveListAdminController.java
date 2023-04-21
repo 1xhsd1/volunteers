@@ -40,7 +40,7 @@ public class LoveListAdminController {
         try {
             Date releaseDate = new Date();
             loveList.setReleasseDate(releaseDate);
-            //调用新增活动的方法
+            //调用新增房间的方法
             int count = loveListService.addLoveList(loveList);
             if(count>0){
                 map.put("success",true);//发布成功

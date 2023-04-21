@@ -22,13 +22,13 @@ public class Event implements Serializable {
 private static final long serialVersionUID=1L;
 
     /**
-     * 活动id
+     * 房间id
      */
     @TableId(value = "eventId", type = IdType.AUTO)
     private Integer eventId;
 
     /**
-     * 活动标题
+     * 房间标题
      */
     private String title;
 
@@ -51,12 +51,12 @@ private static final long serialVersionUID=1L;
     private Integer replyHit;
 
     /**
-     * 活动地点
+     * 房间地点
      */
     private String site;
 
     /**
-     * 活动类型
+     * 房间类型
      */
     private Integer type;
 
@@ -79,17 +79,17 @@ private static final long serialVersionUID=1L;
     private Integer haveScale;
 
     /**
-     * 活动内容
+     * 房间内容
      */
     private String content;
 
     /**
-     * 活动摘要
+     * 房间摘要
      */
     private String summary;
 
     /**
-     * 活动持续时间
+     * 房间持续时间
      */
     @TableField("eventTime")
     private Double eventTime;
@@ -115,7 +115,7 @@ private static final long serialVersionUID=1L;
         return typeName;
     }
 
-    //活动内容，无html标签
+    //房间内容，无html标签
     @TableField(exist = false)
     private String contentNoTag;
 

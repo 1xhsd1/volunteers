@@ -3,7 +3,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>WE志愿服务中心</title>
+    <title>时尚酒店服务中心</title>
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
     <!--[if IE]>
 
@@ -48,11 +48,11 @@
     <script type="text/javascript">
 
         $(function () {
-            //活动类别下拉列表加入请选择
+            //房间类别下拉列表加入请选择
             $("#blogTypeId").combobox({
                 loadFilter: function (data) {
                     //typeId和typeName必须是Eventtype实体类的属性名
-                    var obj = {type: "", typeName: "请选择活动类别"};//类别属性数组
+                    var obj = {type: "", typeName: "请选择房间类别"};//类别属性数组
                     //obj.id="";//分类id
                     //obj.typeName="请选择博客类别";
                     //在数组0位置插入obj,不删除原来的元素
@@ -63,40 +63,40 @@
         })
 
         function submitData() {
-            //获取隐藏域中的活动编号
+            //获取隐藏域中的房间编号
             var id = $("#eventId").val();
             //获取标题
             var title = $("#title").textbox("getValue");
             //获取地点
-            var site = $("#site").textbox("getValue");
+            // var site = $("#site").textbox("getValue");
             //获取人数
             var needScale = $("#needScale").val();
             //获取开始报名时间
             var releaseDate = $("#releaseDate").val();
             //获取截至报名时间
-            var runDate = $("#runDate").val();
+            // var runDate = $("#runDate").val();
             //获取内容
             var content = UE.getEditor('editor').getContent();
             //获取类型
             var blogTypeId = $("#blogTypeId").combobox("getValue");
             //非空验证
             if (title.length == 0) {
-                $.messager.alert("系统提示", "活动标题不能为空！", "info");
+                $.messager.alert("系统提示", "房间标题不能为空！", "info");
             } else if (blogTypeId.length == 0) {
-                $.messager.alert("系统提示", "请选择活动类别！", "info");
+                $.messager.alert("系统提示", "请选择房间类别！", "info");
             } else if (content.length == 0) {
-                $.messager.alert("系统提示", "活动内容不能为空！", "info");
-            } else if (site.length == 0) {
-                $.messager.alert("系统提示", "活动地点不能为空！", "info");
+                $.messager.alert("系统提示", "房间内容不能为空！", "info");
+            // } else if (site.length == 0) {
+            //     $.messager.alert("系统提示", "房间地点不能为空！", "info");
             } else if (needScale.length == 0) {
                 $.messager.alert("系统提示", "所需人数不能为空！", "info");
             } else if (needScale<1) {
                 $.messager.alert("系统提示", "所需人数设置不正确！", "info");
             } else if (releaseDate.length == 0) {
                 $.messager.alert("系统提示", "开始报名日期容不能为空！", "info");
-            } else if (runDate.length == 0) {
-                $.messager.alert("系统提示", "截至报名日期不能为空！", "info");
-            } else if (releaseDate>runDate || releaseDate<new Date() || runDate<new Date()) {
+            // } else if (runDate.length == 0) {
+            //     $.messager.alert("系统提示", "截至报名日期不能为空！", "info");
+            } else if (releaseDate<new Date()) {
                 $.messager.alert("系统提示", "日期设置不正确！", "info");
             } else {
                 var contentNoTag = UE.getEditor('editor').getContentTxt();//获取纯文本
@@ -109,17 +109,17 @@
                     "type": blogTypeId,
                     "summary": summary,
                     "contentNoTag":contentNoTag,
-                    "site": site,
+                    // "site": site,
                     "needScale": needScale,
                     "releaseDateStr": releaseDate,
-                    "runDateStr": runDate
+                    // "runDateStr": runDate
                 };
                 //发送提交请求
                 $.post("/admin/event/updateEvent", param, function (data) {
                     if (data.success) {
                         $.messager.show({
                             title: '系统提示',
-                            msg: '活动修改成功',
+                            msg: '房间修改成功',
                             timeout: 3000,
                             showType: 'slide'
                         });
@@ -128,7 +128,7 @@
                     }else{
                         $.messager.show({
                             title: '系统提示',
-                            msg: '活动修改失败',
+                            msg: '房间修改失败',
                             timeout: 3000,
                             showType: 'slide'
                         });
@@ -148,10 +148,10 @@
             $("#title").textbox("setValue","");
             $("#blogTypeId").combobox("setValue","");
             UE.getEditor('editor').setContent('');
-            $("#site").textbox("setValue","");
+            // $("#site").textbox("setValue","");
             $("#needScale").textbox("setValue","");
             $("#releaseDate").textbox("setValue","");
-            $("#runDate").textbox("setValue","");
+            // $("#runDate").textbox("setValue","");
         }
 
     </script>
@@ -168,17 +168,17 @@
     </section>
     <header id="pageheader">
         <h1>
-            WE<span>志愿</span>
+            时尚<span>酒店</span>
         </h1>
     </header>
     <div id="contents">
         <section id="main">
             <!-- 隐藏域，保存博客id，因为修改是要根据主键修改 -->
             <input type="hidden" name="eventId" id="eventId" th:value="${eventId}">
-            <div id="p" title="修改活动" style="height: auto;padding-left: 10px;margin-left: 10px">
+            <div id="p" title="修改房间" style="height: auto;padding-left: 10px;margin-left: 10px">
                 <table cellspacing="20px">
                     <tr>
-                        <td width="80px">活动标题：</td>
+                        <td width="80px">房间标题：</td>
                         <td>
                             <input  class="easyui-textbox" type="text" id="title" name="title" style="width: 400px" required/>
                         </td>
@@ -191,32 +191,32 @@
                                    name="eventType.typeId" editable="false" panelHeight="auto"/>
                         </td>
                     </tr>
+<!--                    <tr>-->
+<!--                        <td width="80px">房间地点：</td>-->
+<!--                        <td>-->
+<!--                            <input  class="easyui-textbox" type="text" id="site" name="site" style="width: 400px" required/>-->
+<!--                        </td>-->
+<!--                    </tr>-->
                     <tr>
-                        <td width="80px">活动地点：</td>
-                        <td>
-                            <input  class="easyui-textbox" type="text" id="site" name="site" style="width: 400px" required/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="80px">开始报名：</td>
+                        <td width="80px">最早预约时间：</td>
                         <td>
                             <input  class="easyui-textbox" type="datetime-local" id="releaseDate" name="releaseDate" style="width: 400px" required/>
                         </td>
                     </tr>
+<!--                    <tr>-->
+<!--                        <td width="80px">截至报名：</td>-->
+<!--                        <td>-->
+<!--                            <input  class="easyui-textbox" type="datetime-local" id="runDate" name="runDate" style="width: 400px" required/>-->
+<!--                        </td>-->
+<!--                    </tr>-->
                     <tr>
-                        <td width="80px">截至报名：</td>
-                        <td>
-                            <input  class="easyui-textbox" type="datetime-local" id="runDate" name="runDate" style="width: 400px" required/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="80px">所需人数：</td>
+                        <td width="80px">最大容纳人数：</td>
                         <td>
                             <input  class="easyui-textbox" type="number" min="1" id="needScale" name="needScale" style="width: 400px" required/>
                         </td>
                     </tr>
                     <tr>
-                        <td valign="top">活动内容：</td>
+                        <td valign="top">房间介绍：</td>
                         <td>
                             <textarea id="editor" name="content" type="text/plain" style="width: 100%;height: 300px;"></textarea>
                         </td>
@@ -224,7 +224,7 @@
                     <tr>
                         <td></td>
                         <td>
-                            <a href="javascript:submitData()" class="easyui-linkbutton" data-options="iconCls:'icon-submit'">发布活动</a><span></span>
+                            <a href="javascript:submitData()" class="easyui-linkbutton" data-options="iconCls:'icon-submit'">发布房间</a><span></span>
                         </td>
                     </tr>
                 </table>
@@ -247,7 +247,7 @@
                             //对文本框赋值
                             $("#title").textbox("setValue",result.title);
                             $("#blogTypeId").combobox("setValue",result.eventtype.id);
-                            $("#site").textbox("setValue",result.site);
+                            // $("#site").textbox("setValue",result.site);
                             UE.getEditor('editor').setContent(result.content);
                             $("#needScale").textbox("setValue",result.needScale);
 

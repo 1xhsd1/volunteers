@@ -46,7 +46,7 @@ public class IndexController {
 
         //分页查询
         IPage<Event> eventIPage = eventService.findEventByPage(page,event);
-        //获取活动数据列表
+        //获取房间数据列表
         List<Event> eventList = eventIPage.getRecords();
         //将对象放到模型中
         model.addAttribute("eventList",eventList);

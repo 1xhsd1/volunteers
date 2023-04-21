@@ -21,7 +21,7 @@ public interface EventService extends IService<Event> {
     
 
     /**
-     * 分页查询志愿活动
+     * 分页查询房间
      * @param page
      * @param event
      * @return
@@ -29,14 +29,14 @@ public interface EventService extends IService<Event> {
     IPage<Event> findEventByPage(IPage<Event> page, Event event);
 
     /**
-     * 按日期分类志愿活动
+     * 按日期分类房间
      * @return
      * @throws Exception
      */
     String findEventDateAndCount() throws Exception;
 
     /**
-     * 根据id查找活动
+     * 根据id查找房间
      * @param id
      * @return
      * @throws Exception
@@ -44,14 +44,14 @@ public interface EventService extends IService<Event> {
     Event findEventById(int id) throws Exception;
 
     /**
-     * 查询所有志愿活动
+     * 查询所有房间
      * @return
      * @throws Exception
      */
     List<Event> findAllEvent() throws Exception;
 
     /**
-     * 新增活动
+     * 新增房间
      * @param event
      * @return
      * @throws Exception
@@ -59,7 +59,7 @@ public interface EventService extends IService<Event> {
     int addEvent(Event event) throws Exception;
 
     /**
-     * 撤回活动
+     * 撤回房间
      * @param id
      * @return
      * @throws Exception
@@ -67,7 +67,7 @@ public interface EventService extends IService<Event> {
     int deleteEventById(Integer id) throws Exception;
 
     /**
-     * 修改活动
+     * 修改房间
      * @param event
      * @return
      * @throws Exception
