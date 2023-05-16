@@ -6,6 +6,7 @@ import com.volunteers.dao.CommentMapper;
 import com.volunteers.entity.Event;
 import com.volunteers.service.CommentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.volunteers.util.SysConstant;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -27,6 +28,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     @Override
     public List<Comment> findCommentByEventId(Integer id) throws Exception {
         QueryWrapper<Comment> wrapper = new QueryWrapper<>();
+        wrapper.eq("state", SysConstant.COMMENT_STATE_OK);
         wrapper.eq("eventId",id);
         return commentMapper.selectList(wrapper);
     }
@@ -41,5 +43,16 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     @Override
     public List<Comment> findCommentsByUsername(String username) throws Exception {
         return commentMapper.findCommentsByUsername(username);
+    }
+
+    @Override
+    public List<Comment> findAllComment() throws Exception {
+        QueryWrapper<Comment> wrapper = new QueryWrapper<>();
+        return commentMapper.selectList(wrapper);
+    }
+
+    @Override
+    public int changeState(int id, int state) throws Exception {
+        return commentMapper.changeState(id, state);
     }
 }

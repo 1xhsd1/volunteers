@@ -69,7 +69,7 @@
         SELECT t_event.*, t_eventtype.typename typeName
         FROM t_event, t_eventtype
         WHERE t_event.type=t_eventtype.`typeId`
-        ORDER BY releaseDate DESC
+        ORDER BY t_event.cilckHit DESC
     </select>
 
 </mapper>

@@ -2,10 +2,8 @@
 
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+<script th:src="@{/js/bootstrap.js}"></script>
     <meta charset="UTF-8" />
     <title>时尚酒店服务中心</title>
     <!--[if IE]>
@@ -60,11 +58,12 @@
                 <thead>
                 <tr>
                     <!--					<th scope="col">报名日期</th>-->
-                    <th scope="col">预约时间</th>
-                    <th scope="col">入住时间</th>
-                    <th scope="col">退房时间</th>
+<!--                    <th scope="col">预约时间</th>-->
+<!--                    <th scope="col">入住时间</th>-->
+<!--                    <th scope="col">退房时间</th>-->
                     <th scope="col">姓名</th>
-                    <th scope="col">房间</th>
+                    <th scope="col">预约房间</th>
+                    <th scope="col">预约用户</th>
                     <th scope="col">状态</th>
                     <th scope="col">操作</th>
 
@@ -72,15 +71,16 @@
                 </thead>
                 <tbody>
                 <tr th:each="enroll:${enrollList}">
-                    <td th:text="${#dates.format(enroll.enrollDate,'yyyy年MM月dd日HH:mm:ss')}"></td>
-                    <td th:text="${#dates.format(enroll.inDate,'yyyy年MM月dd日HH:mm:ss')}"></td>
-                    <td th:text="${#dates.format(enroll.outDate,'yyyy年MM月dd日HH:mm:ss')}"></td>
+<!--                    <td th:text="${#dates.format(enroll.enrollDate,'yyyy年MM月dd日HH:mm:ss')}"></td>-->
+<!--                    <td th:text="${#dates.format(enroll.inDate,'yyyy年MM月dd日HH:mm:ss')}"></td>-->
+<!--                    <td th:text="${#dates.format(enroll.outDate,'yyyy年MM月dd日HH:mm:ss')}"></td>-->
                     <td th:text="${enroll.realName}"></td>
-                    <td><a th:href="@{/event/view/}+${enroll.temId}"  th:text="${enroll.title}"></a></td>
+                    <td th:text="${enroll.title}"></td>
+                    <td th:text="${enroll.username}"></td>
                     <td th:if="${enroll.state==0}" th:text="已预约" style="color: green"></td>
                     <td th:if="${enroll.state==1}" th:text="已入住" style="color: orange"></td>
                     <td th:if="${enroll.state==2}" th:text="已退房" style="color: red"></td>
-                    <td><a th:href="@{/admin/enroll/success/}+${enroll.id}"><button th:if="${enroll.state==0}" type="button" class="btn btn-success btn-xs">入住</button></a><a th:href="@{/admin/enroll/refuse/}+${enroll.id}"><button th:if="${enroll.state==1}" type="button" class="btn btn-danger btn-xs">退房</button></a><button th:if="${enroll.state==2}" type="button" class="btn btn-danger btn-xs" disabled=true >已退房</button></td>
+                    <td><a th:href="@{/admin/enroll/success/}+${enroll.id}+@{/}+${enroll.eventId}"><button th:if="${enroll.state==0}" type="button" class="btn btn-success btn-xs">入住</button></a><a th:href="@{/admin/enroll/refuse/}+${enroll.id}+@{/}+${enroll.eventId}"><button th:if="${enroll.state==1}" type="button" class="btn btn-danger btn-xs">退房</button></a><button th:if="${enroll.state==2}" type="button" class="btn btn-danger btn-xs" disabled=true >已退</button>  <a th:href="@{/admin/enroll/}+${enroll.id}"><button type="button" class="btn btn-success btn-xs">详情</button></a></td>
                 </tr>
                 <!--				<tr>-->
                 <!--					<th scope="row">2</th>-->

@@ -2,6 +2,7 @@ package com.volunteers.dao;
 
 import com.volunteers.entity.Comment;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -21,5 +22,13 @@ public interface CommentMapper extends BaseMapper<Comment> {
      * @throws Exception
      */
     List<Comment> findCommentsByUsername(String username) throws Exception;
+
+    /**
+     * 审核评论
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    int changeState(@Param("id") int id, @Param("state") int state) throws Exception;
 
 }

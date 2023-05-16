@@ -37,4 +37,8 @@ public interface CommentService extends IService<Comment> {
      * @throws Exception
      */
     List<Comment> findCommentsByUsername(String username) throws Exception;
+
+    List<Comment> findAllComment() throws Exception;
+
+    int changeState(int id, int state) throws Exception;
 }

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import javax.jws.WebParam;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -72,13 +73,17 @@ public class EnrollAdminController {
      * @param id
      * @return
      */
-    @RequestMapping("/enroll/success/{id}")
-    private String enrollSuccess(@PathVariable("id") int id){
+    @RequestMapping("/enroll/success/{id}/{eventId}")
+    private String enrollSuccess(@PathVariable("id") int id, @PathVariable("eventId") int eventId){
         try {
             Enroll enroll = enrollService.findEnrollById(id);
             enroll.setState(1);
             enroll.setInDate(new Date());
             enrollService.updateEnrollById(enroll);
+
+            Event event = eventService.findEventById(eventId);
+            event.setHaveScale(event.getHaveScale()-1);
+            eventService.updateById(event);
 
 //            //修改个人志愿时长
 //            Subject subject = SecurityUtils.getSubject();
@@ -104,13 +109,17 @@ public class EnrollAdminController {
      * @param id
      * @return
      */
-    @RequestMapping("/enroll/refuse/{id}")
-    private String enrollRefuse(@PathVariable("id") int id){
+    @RequestMapping("/enroll/refuse/{id}/{eventId}")
+    private String enrollRefuse(@PathVariable("id") int id, @PathVariable("eventId") int eventId){
         try {
             Enroll enroll = enrollService.findEnrollById(id);
             enroll.setState(2);
             enroll.setOutDate(new Date());
             enrollService.updateEnrollById(enroll);
+
+            Event event = eventService.findEventById(eventId);
+            event.setHaveScale(event.getHaveScale()-1);
+            eventService.updateById(event);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -137,6 +146,20 @@ public class EnrollAdminController {
             e.printStackTrace();
         }
         return JSON.toJSONString(map);
+    }
+
+    /**
+     * 获取已预约客户的信息
+     * @param model
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("/enroll/{id}")
+    public String findEnrollById(Model model, @PathVariable("id") int id) throws Exception{
+        Enroll enroll = enrollService.findEnrollById(id);
+        model.addAttribute("enroll", enroll);
+        return "admin/userInfo";
     }
 
 }

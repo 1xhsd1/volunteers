@@ -63,7 +63,7 @@ public class EnrollController {
 
     /**
      * 监听消息队列
-     * 消费者进程
+     * 房间进程
      * @param map
      */
     @RabbitHandler

@@ -74,23 +74,13 @@
             <a th:href="@{/user/admin/myInfo}"><i class="icon-white icon-home"></i>我的信息</a>
         </li>
         <li   th:if="${session.user?.isManager}==1">
-            <a th:href="@{/admin/index}"><i class="icon-white icon-home"></i>酒店房间管理</a>
-        </li>
-        <li th:if="${session.user?.isManager}==1">
-            <a th:href="@{/admin/toLoveList}"><i class="icon-folder-open"></i>新增酒店员工</a>
-        </li>
-
-        <li th:if="${session.user?.isManager}==1">
-            <a th:href="@{/admin/toNotice}"><i class="icon-folder-open"></i>发布酒店公告</a>
-        </li>
-        <li th:if="${session.user?.isManager}==1">
-            <a th:href="@{/admin/toWriteEvent}"><i class="icon-folder-open"></i>发布酒店房间</a>
+            <a th:href="@{/admin/index}"><i class="icon-white icon-home"></i>房间管理</a>
         </li>
         <li th:if="${session.user?.isManager}==0">
             <a th:href="@{/comment/toCommentManage}"><i class="icon-check"></i> 评论管理</a>
         </li>
         <li  th:if="${session.user?.isManager}==1">
-            <a th:href="@{/admin/toEnrollCheck}"><i class="icon-envelope"></i>客户入住管理</a>
+            <a th:href="@{/admin/toEnrollCheck}"><i class="icon-envelope"></i>客户管理</a>
         </li>
         <li th:if="${session.user?.isManager}==0">
             <a th:href="@{/admin/toEnrollView}"><i class="icon-envelope"></i>订单查看</a>
@@ -104,7 +94,15 @@
 
         </li>
         <li  th:if="${session.user?.isManager}==1">
-            <a th:href="@{/notice/toNoticeManage}"><i class="icon-list-alt"></i> 酒店公告管理</a>
+            <a th:href="@{/notice/toNoticeManage}"><i class="icon-list-alt"></i> 公告管理</a>
+
+        </li>
+        <li  th:if="${session.user?.isManager}==1">
+            <a th:href="@{/comment/toCheck}"><i class="icon-list-alt"></i> 评论审核</a>
+
+        </li>
+        <li  th:if="${session.user?.isManager}==1">
+            <a th:href="@{/admin/statistics}"><i class="icon-list-alt"></i> 数据统计</a>
 
         </li>
         <li>

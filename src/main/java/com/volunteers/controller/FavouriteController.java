@@ -51,26 +51,17 @@ public class FavouriteController {
             if (subject.isAuthenticated()) {
                 List<Favourite> favorites1 = favouriteService.queryByName(principal, eventId);
                 if (favorites1.size()>0){
-//                    model.addAttribute("addInfo","已加入收藏");
                     session.setAttribute("addInfo", "已加入收藏");
-
                 }else {
                     favorites.setEventId(eventId);
                     favorites.setAddDate(new Date());
-
-
                     favorites.setUsername(principal);
                     //调用MP内置方法保存
                     favouriteService.save(favorites);
-
                     session.setAttribute("addInfo", "收藏成功");
-
                 }
-
-
             }else {
                 return "admin/login";
-
             }
         } catch (Exception e) {
             e.printStackTrace();

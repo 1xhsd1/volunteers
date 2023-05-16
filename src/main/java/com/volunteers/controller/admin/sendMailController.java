@@ -41,9 +41,9 @@ public class sendMailController {
         //设置标题
         simpleMailMessage.setSubject("时尚酒店服务平台回复");
         //设置正文
-        startTime.replace("T", " ");
-        endTime.replace("T", " ");
-        simpleMailMessage.setText(realName+"先生/女士，恭喜你预约成功，您的入住时间是"+startTime+"至"+endTime+"请准时到【时尚酒店】办理入职，预祝你入住愉快。如想了解更多信息请前往平台个人中心。");
+        String startStr = startTime.replace("T", " ");
+        String endStr = endTime.replace("T", " ");
+        simpleMailMessage.setText(realName+"先生/女士，恭喜你预订成功，您的入住时间是"+startStr+"至"+endStr+"请准时到【时尚酒店】办理入住，预祝你入住愉快。如想了解更多信息请前往平台个人中心。");
         //设置发送方和接收方
         simpleMailMessage.setTo(mail);
         simpleMailMessage.setFrom("1687184886@qq.com");

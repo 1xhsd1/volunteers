@@ -6,7 +6,7 @@
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>-->
 <meta charset="UTF-8" />
-<title>WE志愿服务中心</title>
+<title>时尚酒店服务平台</title>
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
 <!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">-->
 <!--    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">-->
@@ -33,6 +33,10 @@
 
 
 <script type="text/javascript" charset="utf-8">
+    function sendComment(){
+        alert("评论已发送成功，请等待管理员审核！")
+    }
+
 	$(function(){
 		$('#slider').loopedSlider({
 			autoStart: 6000,
@@ -128,7 +132,7 @@
       <br>      <br>
 
       <strong>价格：</strong>
-      <span th:text="${event.needScale}"></span>
+      <span th:text="${event.needScale}"></span>/晚（预定单晚的有效期是当天18：00到次日12：00，预定后请按规定时间入住）
       <br>      <br>
 
   </header>
@@ -171,7 +175,7 @@
 <!--    隐藏域-->
     <input id="eventId" type="hidden" th:value="${event.eventId}" name="eventId">
     <p><input class="form-control" name="comments"  type="text" th:placeholder="来说两句吧......">
-        <input type="submit" value="发表" class="btn btn-info"></p>
+        <input type="submit" value="发表" class="btn btn-info" onclick="sendComment()"></p>
 </form>
 
 </section>

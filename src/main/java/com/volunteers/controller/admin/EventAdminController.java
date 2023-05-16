@@ -1,6 +1,7 @@
 package com.volunteers.controller.admin;
 
 import com.alibaba.fastjson.JSON;
+import com.volunteers.dao.EventMapper;
 import com.volunteers.entity.Event;
 import com.volunteers.lucene.EventIndex;
 import com.volunteers.service.CommentService;
@@ -174,6 +175,13 @@ public class EventAdminController {
             e.printStackTrace();
         }
         return JSON.toJSONString(map);
+    }
+
+    @RequestMapping("/statistics")
+    public String statistics(Model model) throws Exception{
+        List<Event> events = eventService.findAllEvent();
+        model.addAttribute("events", events);
+        return "admin/statistics";
     }
 
 
