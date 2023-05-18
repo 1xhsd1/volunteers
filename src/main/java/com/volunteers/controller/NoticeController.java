@@ -4,6 +4,8 @@ package com.volunteers.controller;
 import com.volunteers.entity.Lovelist;
 import com.volunteers.entity.Notice;
 import com.volunteers.service.NoticeService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +39,7 @@ public class NoticeController {
      */
     @RequestMapping("toNoticeList")
     public String findNoticeList(Model model) throws Exception{
-        List<Notice> noticeList = noticeService.findNoticeList();
+        List<Notice> noticeList = noticeService.findNoticeList("");
         model.addAttribute("noticeList", noticeList);
         return "foreign/noticeList";
     }
@@ -65,8 +67,11 @@ public class NoticeController {
      */
     @RequestMapping("/toNoticeManage")
     public String toLoveListManage(Model model){
+        //获取用户名
+        Subject subject = SecurityUtils.getSubject();
+        String username = (String) subject.getPrincipal();
         try {
-            List<Notice> noticeList = noticeService.findNoticeList();
+            List<Notice> noticeList = noticeService.findNoticeList(username);
             model.addAttribute("noticeList", noticeList);
         } catch (Exception e) {
             e.printStackTrace();

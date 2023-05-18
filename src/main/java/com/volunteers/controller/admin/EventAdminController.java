@@ -63,11 +63,11 @@ public class EventAdminController {
 
             //处理前端传递过来的时间
             //传过来的时间格式为 “2022-02-09T10:21” 中间有一个T，所以我们要把T去掉
-            SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm");
-            Date releaseDate = dateFormat.parse(releaseDateStr.replace("T"," "));
+//            SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//            Date releaseDate = dateFormat.parse(releaseDateStr.replace("T",/" "));
 //            Date runDate = dateFormat.parse(runDateStr.replace("T"," "));
 
-            event.setReleaseDate(releaseDate);
+//            event.setReleaseDate(releaseDate);
 //            event.setRunDate(runDate);
 
             //调用新增房间的方法
@@ -153,11 +153,11 @@ public class EventAdminController {
 
             //处理前端传递过来的时间
             //传过来的时间格式为 “2022-02-09T10:21” 中间有一个T，所以我们要把T去掉
-            SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm");
-            Date releaseDate = dateFormat.parse(releaseDateStr.replace("T"," "));
+//            SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm");
+//            Date releaseDate = dateFormat.parse(releaseDateStr.replace("T"," "));
 //            Date runDate = dateFormat.parse(runDateStr.replace("T"," "));
 
-            event.setReleaseDate(releaseDate);
+//            event.setReleaseDate(releaseDate);
 //            event.setRunDate(runDate);
 
             //调用修改博客信息的方法

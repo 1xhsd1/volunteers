@@ -15,14 +15,14 @@ import java.util.List;
  */
 public interface LovelistService extends IService<Lovelist> {
     /**
-     * 查询所有爱心榜单
+     * 查询所有员工榜单
      * @return
      * @throws Exception
      */
-    List<Lovelist> findLoveList() throws Exception;
+    List<Lovelist> findLoveList(String manager) throws Exception;
 
     /**
-     * 根据id查找爱心榜详情
+     * 根据id查找员工榜详情
      * @param id
      * @return
      * @throws Exception
@@ -30,7 +30,7 @@ public interface LovelistService extends IService<Lovelist> {
     Lovelist findFavouriteById(Integer id) throws Exception;
 
     /**
-     * 根据id删除爱心榜
+     * 根据id删除员工榜
      * @return
      * @throws Exception
      */
@@ -38,7 +38,7 @@ public interface LovelistService extends IService<Lovelist> {
 
 
     /**
-     * 新增爱心榜
+     * 新增员工榜
      * @param loveList
      * @return
      * @throws Exception
@@ -46,7 +46,7 @@ public interface LovelistService extends IService<Lovelist> {
     int addLoveList(Lovelist loveList) throws Exception;
 
     /**
-     * 修改爱心榜
+     * 修改员工榜
      * @param lovelist
      * @return
      * @throws Exception

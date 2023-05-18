@@ -57,8 +57,22 @@ private static final long serialVersionUID=1L;
     @TableField("score")
     private Integer score;
 
+    /**
+     * 管理员用户名
+     */
+    @TableField("manager")
+    private String manager;
+
     public Integer getScore() {
         return score;
+    }
+
+    public String getManager() {
+        return manager;
+    }
+
+    public void setManager(String manager) {
+        this.manager = manager;
     }
 
     public void setScore(Integer score) {
@@ -123,6 +137,7 @@ private static final long serialVersionUID=1L;
                 ", releasseDate=" + releasseDate +
                 ", img='" + img + '\'' +
                 ", score=" + score +
+                ", manager='" + manager + '\'' +
                 '}';
     }
 }

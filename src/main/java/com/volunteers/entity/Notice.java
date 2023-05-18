@@ -36,6 +36,17 @@ private static final long serialVersionUID=1L;
     @TableField("img")
     private String img;
 
+    @TableField("manager")
+    private String manager;
+
+    public String getManager() {
+        return manager;
+    }
+
+    public void setManager(String manager) {
+        this.manager = manager;
+    }
+
     public String getImg() {
         return img;
     }
@@ -87,11 +98,13 @@ private static final long serialVersionUID=1L;
     @Override
     public String toString() {
         return "Notice{" +
-        "id=" + id +
-        ", summary=" + summary +
-        ", title=" + title +
-        ", content=" + content +
-        ", releaseDate=" + releaseDate +
-        "}";
+                "id=" + id +
+                ", summary='" + summary + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", releaseDate=" + releaseDate +
+                ", img='" + img + '\'' +
+                ", manager='" + manager + '\'' +
+                '}';
     }
 }

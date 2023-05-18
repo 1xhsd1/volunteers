@@ -3,7 +3,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8" />
-	<title>WE志愿服务中心</title>
+	<title>时尚酒店服务中心</title>
 	<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
 	<!--[if IE]>
 
@@ -61,7 +61,7 @@
 				$.messager.alert("系统提示", "员工座右铭不能为空！", "info");
 			}
 			// else if (img == null) {
-			// 	$.messager.alert("系统提示", "爱心榜图片不能为空！", "info");
+			// 	$.messager.alert("系统提示", "员工榜图片不能为空！", "info");
 			// }
 			else {
 				var contentNoTag = UE.getEditor('editor').getContentTxt();//获取纯文本
@@ -79,7 +79,7 @@
 					if (data.success) {
 						$.messager.show({
 							title: '系统提示',
-							msg: '房间发布成功',
+							msg: '员工发布成功',
 							timeout: 3000,
 							showType: 'slide'
 						});
@@ -88,7 +88,7 @@
 					}else{
 						$.messager.show({
 							title: '系统提示',
-							msg: '房间发布失败',
+							msg: '员工发布失败',
 							timeout: 3000,
 							showType: 'slide'
 						});

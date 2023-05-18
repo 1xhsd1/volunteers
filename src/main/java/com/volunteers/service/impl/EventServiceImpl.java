@@ -80,7 +80,7 @@ public class EventServiceImpl extends ServiceImpl<EventMapper, Event> implements
     public int addEvent(Event event) throws Exception {
         event.setCilckHit(0);//阅读量
         event.setReplyHit(0);//评论数量
-        event.setHaveScale(0);//已报名人数
+        event.setSite("");
 
         //清空两个缓存
         redisTemplate.delete(SysConstant.EVENT_DATE_COUNT);//清空按日期查询的缓存

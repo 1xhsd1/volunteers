@@ -32,9 +32,12 @@ public class NoticeServiceImpl extends ServiceImpl<NoticeMapper, Notice> impleme
     }
 
     @Override
-    public List<Notice> findNoticeList() throws Exception {
+    public List<Notice> findNoticeList(String manager) throws Exception {
         QueryWrapper<Notice> wrapper = new QueryWrapper<>();
         wrapper.orderByDesc("releaseDate");
+        if (!manager.equals("")){
+            wrapper.eq("manager", manager);
+        }
         return noticeMapper.selectList(wrapper);
 
     }

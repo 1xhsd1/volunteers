@@ -28,6 +28,28 @@ private static final long serialVersionUID=1L;
     @TableField("orderNo")
     private Integer orderNo;
 
+    @TableField("total")
+    private Integer total;
+
+    @TableField("surplus")
+    private Integer surplus;
+
+    public Integer getTotal() {
+        return total;
+    }
+
+    public void setTotal(Integer total) {
+        this.total = total;
+    }
+
+    public Integer getSurplus() {
+        return surplus;
+    }
+
+    public void setSurplus(Integer surplus) {
+        this.surplus = surplus;
+    }
+
     public Integer getEventCount() {
         return eventCount;
     }
@@ -67,9 +89,12 @@ private static final long serialVersionUID=1L;
     @Override
     public String toString() {
         return "Eventtype{" +
-        "typeId=" + typeId +
-        ", typeName=" + typeName +
-        ", orderNo=" + orderNo +
-        "}";
+                "typeId=" + typeId +
+                ", typeName='" + typeName + '\'' +
+                ", orderNo=" + orderNo +
+                ", total=" + total +
+                ", surplus=" + surplus +
+                ", eventCount=" + eventCount +
+                '}';
     }
 }

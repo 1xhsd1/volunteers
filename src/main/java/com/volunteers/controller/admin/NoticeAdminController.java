@@ -6,6 +6,8 @@ import com.volunteers.entity.Notice;
 import com.volunteers.service.CommentService;
 import com.volunteers.service.FavouriteService;
 import com.volunteers.service.NoticeService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -36,9 +38,14 @@ public class NoticeAdminController {
     @PostMapping("/notice/addNotice")
     public String addNotice(Notice notice){
         Map<String,Object> map = new HashMap<>();
+
+        //获取用户名
+        Subject subject = SecurityUtils.getSubject();
+        String username = (String) subject.getPrincipal();
         try {
             Date releaseDate = new Date();
             notice.setReleaseDate(releaseDate);
+            notice.setManager(username);
             //调用新增房间的方法
             int count = noticeService.addNotice(notice);
             if(count>0){
@@ -97,8 +104,8 @@ public class NoticeAdminController {
         try {
 
             //处理前端传递过来的时间
-            Date releaseDate = new Date();
-            notice.setReleaseDate(releaseDate);
+//            Date releaseDate = new Date();
+//            notice.setReleaseDate(releaseDate);
 
             //调用修改博客信息的方法
             int count = noticeService.updateNotice(notice);

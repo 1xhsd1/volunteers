@@ -77,7 +77,7 @@ public class navController {
 
 
     /**
-     * 导航到发布爱心榜页面
+     * 导航到发布员工榜页面
      * @return
      */
     @RequestMapping("/admin/toLoveList")

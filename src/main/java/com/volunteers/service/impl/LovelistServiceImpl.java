@@ -24,9 +24,12 @@ public class LovelistServiceImpl extends ServiceImpl<LovelistMapper, Lovelist> i
     private LovelistMapper lovelistMapper;
 
     @Override
-    public List<Lovelist> findLoveList() throws Exception {
+    public List<Lovelist> findLoveList(String manager) throws Exception {
         QueryWrapper<Lovelist> wrapper = new QueryWrapper<>();
         wrapper.orderByDesc("score");
+        if (!manager.equals("")){
+            wrapper.eq("manager", manager);
+        }
         return lovelistMapper.selectList(wrapper);
     }
 
@@ -43,7 +46,7 @@ public class LovelistServiceImpl extends ServiceImpl<LovelistMapper, Lovelist> i
     }
 
     /**
-     * 添加爱心榜
+     * 添加员工榜
      * @param loveList
      * @return
      * @throws Exception
@@ -56,7 +59,7 @@ public class LovelistServiceImpl extends ServiceImpl<LovelistMapper, Lovelist> i
 
 
     /**
-     * 修改爱心榜
+     * 修改员工榜
      * @param lovelist
      * @return
      * @throws Exception

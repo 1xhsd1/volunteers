@@ -20,7 +20,7 @@ public interface NoticeService extends IService<Notice> {
      * @return
      * @throws Exception
      */
-    List<Notice> findNoticeList() throws Exception;
+    List<Notice> findNoticeList(String manager) throws Exception;
 
     /**
      * 根据id查找公告

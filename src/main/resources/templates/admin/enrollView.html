@@ -57,7 +57,7 @@
                 <thead>
                 <tr>
                     <!--					<th scope="col">报名日期</th>-->
-                    <th scope="col">预约日期</th>
+                    <th scope="col">预订日期</th>
                     <th scope="col">入住时间</th>
                     <th scope="col">退房时间</th>
                     <th scope="col">房间</th>
@@ -72,7 +72,7 @@
                     <td th:text="${#dates.format(enroll.outDate,'yyyy年MM月dd日HH:mm:ss')}"></td>
                     <td><a th:href="@{/event/view/}+${enroll.temId}"  th:text="${enroll.title}"></a></td>
                     <td>
-                        <span th:if="${enroll.state==0}" style="color: green">已预约</span>
+                        <span th:if="${enroll.state==0}" style="color: green">已预订</span>
                         <span th:if="${enroll.state==1}" style="color: orange">入住中</span>
                         <span th:if="${enroll.state==2}" style="color: red">已退房</span>
 

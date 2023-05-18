@@ -5,6 +5,8 @@ import com.volunteers.entity.Lovelist;
 import com.volunteers.service.CommentService;
 import com.volunteers.service.FavouriteService;
 import com.volunteers.service.LovelistService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +31,7 @@ public class LoveListAdminController {
     private CommentService commentService;
 
     /**
-     * 发布爱心榜
+     * 发布员工榜
      * @param loveList
      * @return
      */
@@ -37,9 +39,15 @@ public class LoveListAdminController {
     @PostMapping("/lovelist/addLoveList")
     public String addLoveList(Lovelist loveList){
         Map<String,Object> map = new HashMap<>();
+
+        //获取用户名
+        Subject subject = SecurityUtils.getSubject();
+        String username = (String) subject.getPrincipal();
+
         try {
             Date releaseDate = new Date();
             loveList.setReleasseDate(releaseDate);
+            loveList.setManager(username);
             //调用新增房间的方法
             int count = loveListService.addLoveList(loveList);
             if(count>0){
@@ -56,7 +64,7 @@ public class LoveListAdminController {
 
 
     /**
-     *修改爱心榜
+     *修改员工榜
      * @param id
      * @param model
      * @return
@@ -64,7 +72,6 @@ public class LoveListAdminController {
      */
     @GetMapping("/lovelist/update/{id}")
     public  String toUpdateBlog(@PathVariable("id")int id, Model model) throws Exception{
-        System.out.println(id);
         model.addAttribute("id", id);
         return "/admin/updateLovelist";
     }
@@ -89,7 +96,7 @@ public class LoveListAdminController {
     }
 
     /**
-     * 接收数据并修改爱心榜
+     * 接收数据并修改员工榜
      * @param lovelist
      * @return
      */
@@ -98,10 +105,6 @@ public class LoveListAdminController {
     public String updateLoveList(Lovelist lovelist){
         Map<String, Object> map = new HashMap<>();
         try {
-            Date releaseDate = new Date();
-            lovelist.setReleasseDate(releaseDate);
-            System.out.println(lovelist);
-
             //调用修改博客信息的方法
             int count = loveListService.updateLoveList(lovelist);
             if(count>0){//修改成功

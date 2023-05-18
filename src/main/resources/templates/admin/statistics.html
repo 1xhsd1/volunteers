@@ -64,8 +64,11 @@
           <th scope="col">房间</th>
           <th scope="col">浏览量</th>
           <th scope="col">评论量</th>
-          <th scope="col">总数（间）</th>
-          <th scope="col">剩余（间）</th>
+          <th scope="col">面积（平方米）</th>
+          <th scope="col">可居住人数（人）</th>
+          <th scope="col">该类型房间数</th>
+          <th scope="col">剩余</th>
+
 
         </tr>
         </thead>
@@ -77,6 +80,9 @@
           <td th:text="${event.replyHit}"></td>
           <td th:text="${event.needScale}"></td>
           <td th:text="${event.haveScale}"></td>
+          <td th:text="${event.eventtype.total}"></td>
+          <td th:text="${event.eventtype.surplus}"></td>
+
         </tr>
         <!--				<tr>-->
         <!--					<th scope="row">2</th>-->

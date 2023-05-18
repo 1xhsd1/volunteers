@@ -3,6 +3,8 @@ package com.volunteers.controller;
 
 import com.volunteers.entity.Lovelist;
 import com.volunteers.service.LovelistService;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,14 +30,14 @@ public class LovelistController {
     private LovelistService lovelistService;
 
     /**
-     * 查询爱心榜单
+     * 查询员工榜单
      * @param model
      * @return
      * @throws Exception
      */
     @RequestMapping("toLoveList")
     public String toLoveList(Model model) throws Exception{
-        List<Lovelist> loveList = lovelistService.findLoveList();
+        List<Lovelist> loveList = lovelistService.findLoveList("");
         model.addAttribute("loveList", loveList);
         return "foreign/loveList";
     }
@@ -53,13 +55,16 @@ public class LovelistController {
     }
 
     /**
-     * 爱心榜管理
+     * 员工榜管理
      * @return
      */
     @RequestMapping("/toLoveListManage")
     public String toLoveListManage(Model model){
+
+        Subject subject = SecurityUtils.getSubject();
+        String userName = (String) subject.getPrincipal();
         try {
-            List<Lovelist> loveList = lovelistService.findLoveList();
+            List<Lovelist> loveList = lovelistService.findLoveList(userName);
             model.addAttribute("loveList", loveList);
         } catch (Exception e) {
             e.printStackTrace();
@@ -68,7 +73,7 @@ public class LovelistController {
     }
 
     /**
-     * 根据id删除爱心榜
+     * 根据id删除员工榜
      * @return
      */
     @RequestMapping("/delete/{id}")

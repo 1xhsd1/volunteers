@@ -18,4 +18,12 @@ public interface EventtypeService extends IService<Eventtype> {
      * @throws Exception
      */
     String findEventTypeNameAndEventCount() throws Exception;
+
+    /**
+     * 根据id查找房间类型
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    Eventtype findTypeById(int id) throws Exception;
 }

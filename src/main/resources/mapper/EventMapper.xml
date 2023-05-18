@@ -56,17 +56,19 @@
         <association property="eventtype" javaType="com.volunteers.entity.Eventtype">
             <id property="typeId" column="type_id"/>
             <result property="typeName" column="typeName"/>
+            <result property="total" column="total"/>
+            <result property="surplus" column="surplus"/>
         </association>
     </resultMap>
 
     <select id="findEventById" resultMap="eventTypeResultMap">
-        SELECT b.* ,t.typeId type_id,t.typeName FROM t_event b
+        SELECT b.* ,t.typeId type_id,t.typeName,t.total,t.surplus FROM t_event b
         INNER JOIN t_eventtype t ON b.type = t.typeId
         where b.eventId = #{id}
     </select>
 
-    <select id="findAllEvent" resultType="com.volunteers.entity.Event">
-        SELECT t_event.*, t_eventtype.typename typeName
+    <select id="findAllEvent" resultMap="eventTypeResultMap">
+        SELECT t_event.*, t_eventtype.typename typeName, t_eventtype.total, t_eventtype.surplus
         FROM t_event, t_eventtype
         WHERE t_event.type=t_eventtype.`typeId`
         ORDER BY t_event.cilckHit DESC

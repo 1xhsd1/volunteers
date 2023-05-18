@@ -67,12 +67,12 @@
             var id = $("#eventId").val();
             //获取标题
             var title = $("#title").textbox("getValue");
-            //获取地点
-            // var site = $("#site").textbox("getValue");
-            //获取人数
+            //获取房间面积
             var needScale = $("#needScale").val();
-            //获取开始报名时间
-            var releaseDate = $("#releaseDate").val();
+            //获取可居住人数
+            var haveScale = $("#haveScale").val();
+            //获取房间价格
+            var eventTime = $("#eventTime").val();
             //获取截至报名时间
             // var runDate = $("#runDate").val();
             //获取内容
@@ -85,19 +85,21 @@
             } else if (blogTypeId.length == 0) {
                 $.messager.alert("系统提示", "请选择房间类别！", "info");
             } else if (content.length == 0) {
-                $.messager.alert("系统提示", "房间内容不能为空！", "info");
-            // } else if (site.length == 0) {
-            //     $.messager.alert("系统提示", "房间地点不能为空！", "info");
+                $.messager.alert("系统提示", "房间介绍不能为空！", "info");
+                // } else if (site.length == 0) {
+                // 	$.messager.alert("系统提示", "房间地点不能为空！", "info");
             } else if (needScale.length == 0) {
-                $.messager.alert("系统提示", "所需人数不能为空！", "info");
-            } else if (needScale<1) {
-                $.messager.alert("系统提示", "所需人数设置不正确！", "info");
-            } else if (releaseDate.length == 0) {
-                $.messager.alert("系统提示", "开始报名日期容不能为空！", "info");
-            // } else if (runDate.length == 0) {
-            //     $.messager.alert("系统提示", "截至报名日期不能为空！", "info");
-            } else if (releaseDate<new Date()) {
-                $.messager.alert("系统提示", "日期设置不正确！", "info");
+                $.messager.alert("系统提示", "房间面积不能为空！", "info");
+            } else if (needScale <= 0) {
+                $.messager.alert("系统提示", "房间面积设置不正确！", "info");
+            } else if (eventTime.length == 0) {
+                $.messager.alert("系统提示", "房间价格不能为空！", "info");
+            } else if (eventTime <= 0) {
+                $.messager.alert("系统提示", "房间价格设置不正确！", "info");
+            } else if (haveScale.length == 0) {
+                $.messager.alert("系统提示", "房间可居住人数为空！", "info");
+            } else if (haveScale <= 0) {
+                $.messager.alert("系统提示", "房间可居住人数设置不正确！", "info");
             } else {
                 var contentNoTag = UE.getEditor('editor').getContentTxt();//获取纯文本
                 var summary = UE.getEditor('editor').getContentTxt().substr(0,155);//获取纯文本
@@ -111,8 +113,10 @@
                     "contentNoTag":contentNoTag,
                     // "site": site,
                     "needScale": needScale,
-                    "releaseDateStr": releaseDate,
+                    "haveScale": haveScale,
+                    // "releaseDateStr": releaseDate,
                     // "runDateStr": runDate
+                    "eventTime": eventTime
                 };
                 //发送提交请求
                 $.post("/admin/event/updateEvent", param, function (data) {
@@ -150,7 +154,9 @@
             UE.getEditor('editor').setContent('');
             // $("#site").textbox("setValue","");
             $("#needScale").textbox("setValue","");
+            $("#haveScale").textbox("setValue","");
             $("#releaseDate").textbox("setValue","");
+            $("#eventTime").textbox("setValue","");
             // $("#runDate").textbox("setValue","");
         }
 
@@ -198,11 +204,17 @@
 <!--                        </td>-->
 <!--                    </tr>-->
                     <tr>
-                        <td width="80px">最早预约时间：</td>
+                        <td width="80px">价格（元/晚）：</td>
                         <td>
-                            <input  class="easyui-textbox" type="datetime-local" id="releaseDate" name="releaseDate" style="width: 400px" required/>
+                            <input  class="easyui-textbox" type="number" id="eventTime" name="eventTime" style="width: 400px" required/>
                         </td>
                     </tr>
+<!--                    <tr>-->
+<!--                        <td width="80px">最早预订时间：</td>-->
+<!--                        <td>-->
+<!--                            <input  class="easyui-textbox" type="datetime-local" id="releaseDate" name="releaseDate" style="width: 400px" required/>-->
+<!--                        </td>-->
+<!--                    </tr>-->
 <!--                    <tr>-->
 <!--                        <td width="80px">截至报名：</td>-->
 <!--                        <td>-->
@@ -210,9 +222,15 @@
 <!--                        </td>-->
 <!--                    </tr>-->
                     <tr>
-                        <td width="80px">最大容纳人数：</td>
+                        <td width="80px">房间面积（平方米）：</td>
                         <td>
                             <input  class="easyui-textbox" type="number" min="1" id="needScale" name="needScale" style="width: 400px" required/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="80px">可居住人数：</td>
+                        <td>
+                            <input  class="easyui-textbox" type="number" min="1" id="haveScale" name="haveScale" style="width: 400px" required/>
                         </td>
                     </tr>
                     <tr>
@@ -224,7 +242,7 @@
                     <tr>
                         <td></td>
                         <td>
-                            <a href="javascript:submitData()" class="easyui-linkbutton" data-options="iconCls:'icon-submit'">发布房间</a><span></span>
+                            <a href="javascript:submitData()" class="easyui-linkbutton" data-options="iconCls:'icon-submit'">提交更新</a><span></span>
                         </td>
                     </tr>
                 </table>
@@ -246,10 +264,13 @@
                             result = eval("("+result.responseText+")");
                             //对文本框赋值
                             $("#title").textbox("setValue",result.title);
-                            $("#blogTypeId").combobox("setValue",result.eventtype.id);
+                                $("#blogTypeId").combobox("setValue",result.type);
                             // $("#site").textbox("setValue",result.site);
                             UE.getEditor('editor').setContent(result.content);
                             $("#needScale").textbox("setValue",result.needScale);
+                            $("#haveScale").textbox("setValue",result.haveScale);
+                            $("#eventTime").textbox("setValue",result.eventTime);
+
 
                         }
                     });

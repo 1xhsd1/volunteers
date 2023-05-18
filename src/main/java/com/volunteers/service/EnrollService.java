@@ -48,7 +48,7 @@ public interface EnrollService extends IService<Enroll> {
     int updateEnrollById(Enroll enroll) throws Exception;
 
     /**
-     * 免预约直接入住
+     * 免预订直接入住
      * @param enroll
      * @return
      * @throws Exception

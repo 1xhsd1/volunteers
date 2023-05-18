@@ -3,12 +3,10 @@ package com.volunteers.controller.admin;
 import com.alibaba.fastjson.JSON;
 import com.sun.org.apache.xerces.internal.impl.dv.xs.DayDV;
 import com.volunteers.dao.UserMapper;
-import com.volunteers.entity.Enroll;
-import com.volunteers.entity.Event;
-import com.volunteers.entity.Favourite;
-import com.volunteers.entity.User;
+import com.volunteers.entity.*;
 import com.volunteers.service.EnrollService;
 import com.volunteers.service.EventService;
+import com.volunteers.service.EventtypeService;
 import com.volunteers.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -31,7 +29,7 @@ public class EnrollAdminController {
     @Resource
     private EnrollService enrollService;
     @Resource
-    private UserService userService;
+    private EventtypeService eventtypeService;
 
     @Resource
     private EventService eventService;
@@ -56,7 +54,7 @@ public class EnrollAdminController {
     }
 
     /**
-     * 预约列表
+     * 预订列表
      * @return
      */
     @RequestMapping("/toEnrollCheck")
@@ -118,8 +116,9 @@ public class EnrollAdminController {
             enrollService.updateEnrollById(enroll);
 
             Event event = eventService.findEventById(eventId);
-            event.setHaveScale(event.getHaveScale()-1);
-            eventService.updateById(event);
+            Eventtype eventType = eventtypeService.findTypeById(event.getType());
+            eventType.setSurplus(eventType.getSurplus()+1);
+            eventtypeService.updateById(eventType);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -149,7 +148,7 @@ public class EnrollAdminController {
     }
 
     /**
-     * 获取已预约客户的信息
+     * 获取已预订客户的信息
      * @param model
      * @param id
      * @return

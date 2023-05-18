@@ -3,8 +3,10 @@ package com.volunteers.controller;
 
 import com.volunteers.entity.Enroll;
 import com.volunteers.entity.Event;
+import com.volunteers.entity.Eventtype;
 import com.volunteers.service.EnrollService;
 import com.volunteers.service.EventService;
+import com.volunteers.service.EventtypeService;
 import com.volunteers.util.SysConstant;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.amqp.rabbit.annotation.Queue;
@@ -41,6 +43,9 @@ public class EnrollController {
 
     @Resource
     private RabbitTemplate rabbitTemplate;
+
+    @Resource
+    private EventtypeService eventtypeService;
 
     /**
      * 根据房间id查询标题
@@ -82,15 +87,15 @@ public class EnrollController {
         enroll.setState(SysConstant.UNCHECK_STATE_NO);
         enrollService.save(enroll);
 
-        //房间报名人数+1
-//        try {
-//            Event event = eventService.findEventById(Integer.parseInt(map.get("eventId")));
-//            if (event!=null){
-//                event.setHaveScale(event.getHaveScale()+1);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+//        房间预订人数-1
+        try {
+            Event event = eventService.findEventById(Integer.parseInt(map.get("eventId")));
+            Eventtype eventType = eventtypeService.findTypeById(event.getType());
+            eventType.setSurplus(eventType.getSurplus()-1);
+            eventtypeService.updateById(eventType);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 

@@ -107,6 +107,45 @@
 
         </script>
 
+        <script>
+            function calculatePrice() {
+                // 获取日期输入框的值
+                var startDate = document.getElementById('startTime').value;
+                var endDate = document.getElementById('endTime').value;
+
+                // 校验开始日期
+                var today = new Date();
+                var selectedDate = new Date(startDate);
+                today.setHours(0, 0, 0, 0); // 将时分秒重置为0
+                selectedDate.setHours(0, 0, 0, 0); // 将时分秒重置为0
+
+                if ((startDate && endDate && startDate > endDate) || selectedDate < today){
+                    alert("日期输入错误，请重新输入")
+                    document.getElementById('startTime').value = '';
+                    document.getElementById('endTime').value = '';
+                    return;
+                }
+
+                // 只有当两个日期输入框都有值时才进行计算
+                if (startDate && endDate && startDate <= endDate) {
+                    // 转换日期字符串为 Date 对象
+                    var start = new Date(startDate);
+                    var end = new Date(endDate);
+
+                    // 计算日期差
+                    var timeDiff = Math.abs(end.getTime() - start.getTime());
+                    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+                    var roomPrice = [[${event.eventTime}]];
+                    // 计算总价
+                    var totalPrice = diffDays * roomPrice;
+
+                    // 显示总价
+                    document.getElementById('total-price').innerHTML = totalPrice.toFixed(2);
+                }
+            }
+        </script>
+
     </header>
     <div id="contents">
         <section id="main">
@@ -114,13 +153,16 @@
                 <section id="normalheader" class="header2">
 
                 </section>
-                <h2>房间预约</h2>
+                <h2>房间预订</h2>
 
                 <article class="post">
 
                     <form th:action="@{/sendMail}" th:method="post" class="form" onSubmit="return beforeSubmit(this);">
 
-                        <p style="font-size: 20px">您要预约的房间：<strong th:text="${event.title}"></strong></p>
+                        <p style="font-size: 20px">
+                            您要预订的房间：<strong th:text="${event.title}"></strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            价格：<strong th:text="${event.eventTime}"></strong>/晚
+                            </p>
                         <br>   <br>
 
                         <p><input hidden="hidden" th:value="${event.eventId}" name="eventId" id="eventId"></p>
@@ -155,17 +197,17 @@
                         </p>
                         <p class="textfield">
                             <label for="mail">
-                                <small>入住开始时间：</small>
+                                <small>预计入住时间：</small>
                             </label>
-                            <input name="startTime" id="startTime" value="" size="22" tabindex="5" type="datetime-local">
+                            <input name="startTime" id="startTime" value="" size="22" tabindex="5" type="date" onchange="calculatePrice()" required>
 
                         </p>
 
                         <p class="textfield">
                             <label for="mail">
-                                <small>入住结束时间</small>
+                                <small>预计退房时间</small>
                             </label>
-                            <input name="endTime" id="endTime" value="" size="22" tabindex="6" type="datetime-local">
+                            <input name="endTime" id="endTime" value="" size="22" tabindex="6" type="date" onchange="calculatePrice()" required>
 
                         </p>
 <!--                        <p>-->
@@ -175,7 +217,9 @@
 <!--                            <textarea name="comment" id="comment" cols="50" rows="10" tabindex="4"></textarea>-->
 <!--                        </p>-->
                         <p>
+                            <h2>总价: <span id="total-price"></span></h2>
                             <input name="submit" id="submit" tabindex="7" type="submit" style="background: #31c631;color: white;border-radius: 10px;width: 60px;height: 35px;border: none">
+
                         </p>
                         <div class="clear"></div>
                     </form>

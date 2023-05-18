@@ -66,13 +66,15 @@
 			//获取标题
 			var title = $("#title").textbox("getValue");
 			 //获取地点
-			 var site = $("#site").val();
-			 //获取人数
+			 // var site = $("#site").val();
+			 //获取房间面积
 			 var needScale = $("#needScale").val();
-			 //获取房间持续时间
+			 //获取可居住人数
+			 var haveScale = $("#haveScale").val();
+			 //获取房间价格
 			 var eventTime = $("#eventTime").val();
 			 //获取开始报名时间
-			 var releaseDate = $("#releaseDate").val();
+			 // var releaseDate = $("#releaseDate").val();
 			 //获取截至报名时间
 			 // var runDate = $("#runDate").val();
 			//获取内容
@@ -86,20 +88,26 @@
 				$.messager.alert("系统提示", "请选择房间类别！", "info");
 			} else if (content.length == 0) {
 				$.messager.alert("系统提示", "房间介绍不能为空！", "info");
-			} else if (site.length == 0) {
-				$.messager.alert("系统提示", "房间地点不能为空！", "info");
+			// } else if (site.length == 0) {
+			// 	$.messager.alert("系统提示", "房间地点不能为空！", "info");
 			} else if (needScale.length == 0) {
-				$.messager.alert("系统提示", "容纳人数不能为空！", "info");
+				$.messager.alert("系统提示", "房间面积不能为空！", "info");
+			} else if (needScale <= 0) {
+				$.messager.alert("系统提示", "房间面积设置不正确！", "info");
 			} else if (eventTime.length == 0) {
-				$.messager.alert("系统提示", "房间最长预约时间不能为空！", "info");
+				$.messager.alert("系统提示", "房间价格不能为空！", "info");
+			} else if (eventTime <= 0) {
+				$.messager.alert("系统提示", "房间价格设置不准确！", "info");
 			} else if (needScale<1) {
-				$.messager.alert("系统提示", "最大容纳人数设置不正确！", "info");
-			} else if (releaseDate.length == 0) {
-				$.messager.alert("系统提示", "开始预约日期容不能为空！", "info");
-			// } else if (runDate.length == 0) {
-			// 	$.messager.alert("系统提示", "截至预约日期不能为空！", "info");
-			} else if (releaseDate<new Date()) {
-				$.messager.alert("系统提示", "预约日期设置不正确！", "info");
+				$.messager.alert("系统提示", "房间面积设置不正确！", "info");
+			// } else if (releaseDate.length == 0) {
+			// 	$.messager.alert("系统提示", "开始预订日期容不能为空！", "info");
+			} else if (haveScale.length == 0) {
+				$.messager.alert("系统提示", "房间可居住人数不能为空！", "info");
+			} else if (haveScale <= 0) {
+				$.messager.alert("系统提示", "房间可居住人数设置不正确！", "info");
+			// } else if (releaseDate<new Date()) {
+			// 	$.messager.alert("系统提示", "预订日期设置不正确！", "info");
 			} else {
 				var contentNoTag = UE.getEditor('editor').getContentTxt();//获取纯文本
 				var summary = UE.getEditor('editor').getContentTxt().substr(0,155);//获取纯文本
@@ -110,9 +118,10 @@
 					"type": blogTypeId,
 					"summary": summary,
 					"contentNoTag":contentNoTag,
-					"site": site,
+					// "site": site,
 					"needScale": needScale,
-					"releaseDateStr": releaseDate,
+					"haveScale": haveScale,
+					// "releaseDateStr": releaseDate,
 					// "runDateStr": runDate,
 					"eventTime":eventTime
 				};
@@ -152,7 +161,9 @@
 			UE.getEditor('editor').setContent('');
 			// $("#site").textbox("setValue","");
 			$("#needScale").textbox("setValue","");
+			$("#haveScale").textbox("setValue","");
 			$("#releaseDate").textbox("setValue","");
+			$("#eventTime").textbox("setValue","");
 			// $("#runDate").textbox("setValue","");
 		}
 
@@ -206,17 +217,17 @@
 <!--						</td>-->
 <!--					</tr>-->
 					<tr>
-						<td width="80px">最长可预约（小时）：</td>
+						<td width="80px">价格（元）：</td>
 						<td>
 							<input  class="easyui-textbox" type="number" id="eventTime" name="eventTime" style="width: 400px" required/>
 						</td>
 					</tr>
-					<tr>
-						<td width="80px">最早预约时间：</td>
-						<td>
-							<input  class="easyui-textbox" type="datetime-local" id="releaseDate" name="releaseDate" style="width: 400px" required/>
-						</td>
-					</tr>
+<!--					<tr>-->
+<!--						<td width="80px">最早预订时间：</td>-->
+<!--						<td>-->
+<!--							<input  class="easyui-textbox" type="datetime-local" id="releaseDate" name="releaseDate" style="width: 400px" required/>-->
+<!--						</td>-->
+<!--					</tr>-->
 <!--					<tr>-->
 <!--						<td width="80px">截至报名：</td>-->
 <!--						<td>-->
@@ -224,9 +235,15 @@
 <!--						</td>-->
 <!--					</tr>-->
 					<tr>
-						<td width="80px">价格（元）：</td>
+						<td width="80px">面积（平方米）：</td>
 						<td>
 							<input  class="easyui-textbox" type="number" min="1" id="needScale" name="needScale" style="width: 400px" required/>
+						</td>
+					</tr>
+					<tr>
+						<td width="80px">可居住人数：</td>
+						<td>
+							<input  class="easyui-textbox" type="number" min="1" id="haveScale" name="haveScale" style="width: 400px" required/>
 						</td>
 					</tr>
 					<tr>

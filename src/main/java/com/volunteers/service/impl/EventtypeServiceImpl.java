@@ -45,4 +45,9 @@ public class EventtypeServiceImpl extends ServiceImpl<EventtypeMapper, Eventtype
         }
         return eventTypeInfo;
     }
+
+    @Override
+    public Eventtype findTypeById(int id) throws Exception {
+        return eventtypeMapper.selectById(id);
+    }
 }

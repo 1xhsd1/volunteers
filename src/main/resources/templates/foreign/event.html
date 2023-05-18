@@ -81,7 +81,7 @@
                             <article class="post">
                                 <header>
                                     <h3><a th:href="@{/event/view/}+${event.eventId}" th:text="${event.title}">${event.title}</a></h3>
-                                    <p class="postinfo">最早可于 <a th:text="${#dates.format(event.releaseDate,'yyyy年MM月dd日')}" th:href="@{/event/view/}+${event.eventId}"></a> 开始预定</p>
+<!--                                    <p class="postinfo">最早可于 <a th:text="${#dates.format(event.releaseDate,'yyyy年MM月dd日')}" th:href="@{/event/view/}+${event.eventId}"></a> 开始预定</p>-->
                                 </header>
                                 <p th:text="${event.summary}">
                                     <a th:href="@{/about}">Read More</a></p>
